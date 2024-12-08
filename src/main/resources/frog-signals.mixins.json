@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "com.frogrilla.frog_signals.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ServerWorldMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}

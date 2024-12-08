@@ -1,0 +1,6 @@
+{
+	"parent": "frog-signals:block/tuff_blocker_face",
+	"textures": {
+		"base": "frog-signals:block/tuff_blocker_magma"
+	}
+}

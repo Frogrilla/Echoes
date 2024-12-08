@@ -1,0 +1,87 @@
+{
+  "multipart": [
+    {
+      "when": {"north": false},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face"
+      }
+    },
+    {
+      "when": {"east": false},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face",
+        "y": 90
+      }
+    },
+    {
+      "when": {"south": false},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face",
+        "y": 180
+      }
+    },
+    {
+      "when": {"west": false},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face",
+        "y": 270
+      }
+    },
+    {
+      "when": {"up": false},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face",
+        "x": 270
+      }
+    },
+    {
+      "when": {"down": false},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face",
+        "x": 90
+      }
+    },
+
+    {
+      "when": {"north": true},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face_magma"
+      }
+    },
+    {
+      "when": {"east": true},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "y": 90
+      }
+    },
+    {
+      "when": {"south": true},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "y": 180
+      }
+    },
+    {
+      "when": {"west": true},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "y": 270
+      }
+    },
+    {
+      "when": {"up": true},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "x": 270
+      }
+    },
+    {
+      "when": {"down": true},
+      "apply": {
+        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "x": 90
+      }
+    }
+  ]
+}

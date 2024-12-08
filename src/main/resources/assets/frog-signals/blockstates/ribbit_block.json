@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "triggered=false": {"model": "minecraft:block/bedrock" },
+    "triggered=true": {"model": "minecraft:block/redstone_block" }
+  }
+}

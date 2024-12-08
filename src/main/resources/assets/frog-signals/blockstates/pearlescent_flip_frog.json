@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "enabled=false": {"model": "frog-signals:block/pearlescent_flip_frog" },
+    "enabled=true": {"model": "frog-signals:block/pearlescent_flip_frog_enabled" }
+  }
+}
