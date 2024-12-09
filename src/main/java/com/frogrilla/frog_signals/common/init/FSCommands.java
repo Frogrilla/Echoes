@@ -26,56 +26,56 @@ public class FSCommands {
                         .then(argument("pos", BlockPosArgumentType.blockPos())
                                 .executes(context -> {
                                     final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                    executeNewSignal(pos, Direction.UP, 16, context);
+                                    executeNewSignal(pos,16, Direction.UP, context);
                                     return 1;
                                 })
-                                .then(argument("power", IntegerArgumentType.integer())
+                                .then(argument("frequency", IntegerArgumentType.integer())
                                         .executes(context -> {
                                             final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                            final int power = IntegerArgumentType.getInteger(context, "power");
-                                            executeNewSignal(pos, Direction.UP, power, context);
+                                            final int frequency = IntegerArgumentType.getInteger(context, "frequency");
+                                            executeNewSignal(pos, frequency, Direction.UP, context);
                                             return 1;
                                         })
                                     .then(literal("up")
                                         .executes(context -> {
                                             final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                            final int power = IntegerArgumentType.getInteger(context, "power");
-                                            executeNewSignal(pos, Direction.UP, power, context);
+                                            final int frequency = IntegerArgumentType.getInteger(context, "frequency");
+                                            executeNewSignal(pos, frequency, Direction.UP, context);
                                             return 1;
                                         }))
                                     .then(literal("down")
                                         .executes(context -> {
                                             final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                            final int power = IntegerArgumentType.getInteger(context, "power");
-                                            executeNewSignal(pos, Direction.DOWN, power, context);
+                                            final int frequency = IntegerArgumentType.getInteger(context, "frequency");
+                                            executeNewSignal(pos, frequency, Direction.DOWN, context);
                                             return 1;
                                         }))
                                     .then(literal("north")
                                         .executes(context -> {
                                             final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                            final int power = IntegerArgumentType.getInteger(context, "power");
-                                            executeNewSignal(pos, Direction.NORTH, power, context);
+                                            final int frequency = IntegerArgumentType.getInteger(context, "frequency");
+                                            executeNewSignal(pos, frequency, Direction.NORTH, context);
                                             return 1;
                                         }))
                                     .then(literal("east")
                                         .executes(context -> {
                                             final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                            final int power = IntegerArgumentType.getInteger(context, "power");
-                                            executeNewSignal(pos, Direction.WEST, power, context);
+                                            final int frequency = IntegerArgumentType.getInteger(context, "frequency");
+                                            executeNewSignal(pos, frequency, Direction.EAST, context);
                                             return 1;
                                         }))
                                     .then(literal("south")
                                         .executes(context -> {
                                             final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                            final int power = IntegerArgumentType.getInteger(context, "power");
-                                            executeNewSignal(pos, Direction.SOUTH, power, context);
+                                            final int frequency = IntegerArgumentType.getInteger(context, "frequency");
+                                            executeNewSignal(pos, frequency, Direction.SOUTH, context);
                                             return 1;
                                         }))
                                     .then(literal("west")
                                         .executes(context -> {
                                             final BlockPos pos = BlockPosArgumentType.getBlockPos(context, "pos");
-                                            final int power = IntegerArgumentType.getInteger(context, "power");
-                                            executeNewSignal(pos, Direction.WEST, power, context);
+                                            final int frequency = IntegerArgumentType.getInteger(context, "frequency");
+                                            executeNewSignal(pos, frequency, Direction.WEST, context);
                                             return 1;
                                         })))))
 
@@ -95,12 +95,12 @@ public class FSCommands {
         ));
     }
 
-    private static void executeNewSignal(BlockPos blockPos, Direction direction, int power, CommandContext<ServerCommandSource> context) {
+    private static void executeNewSignal(BlockPos blockPos, int frequency, Direction direction, CommandContext<ServerCommandSource> context) {
         SignalManager manager = persistentManagerState.getServerWorldState(context.getSource().getWorld()).signalManager;
         manager.addSignal(new Signal(
-                blockPos, direction, power
+                blockPos, frequency, direction
         ));
-        context.getSource().sendFeedback(() -> Text.literal("Created signal in %s:\nAt %s\nPower: %s\nDirection: %s".formatted(context.getSource().getWorld().getRegistryKey().getValue(), blockPos.toShortString(), power, direction)), true);
+        context.getSource().sendFeedback(() -> Text.literal("Created signal in %s:\nAt %s\nFrequency: %s\nDirection: %s".formatted(context.getSource().getWorld().getRegistryKey().getValue(), blockPos.toShortString(), frequency, direction)), true);
     }
 
     private static void executeClearSignals(CommandContext<ServerCommandSource> context){

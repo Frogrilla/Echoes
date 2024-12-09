@@ -18,6 +18,7 @@ import java.util.List;
 public class SignalManager {
 
     public final static int ticksPerStep = 1;
+    public final static int defaultPower = 15;
 
     public List<Signal> signals = new ArrayList<>();
     public List<Signal> signalBuffer = new ArrayList<>();
@@ -34,29 +35,31 @@ public class SignalManager {
     public void tickSignals(ServerWorld world){
         signals.forEach(signal ->{
             if(!world.isPosLoaded(signal.getBlockPos())) return;
-            if(signal.increment()){
+            signal.increment();
+            if(signal.getCounter() == 0){
+                FrogSignals.LOGGER.info("Signal process: ${signal}");
                 BlockState state = world.getBlockState(signal.getBlockPos());
-                // Signal disrupted
+
+                // Signal disrupted by interactor
                 if(state.getBlock() instanceof ISignalInteractor interactor){
-                    interactor.processSignal(signal, this, world);
+                    interactor.processSignal(signal, this, world, state);
                     return;
                 }
 
                 Vec3d pos = signal.getBlockPos().toCenterPos();
-                signal.step();
 
                 // Signal ends
-                if (signal.getPower() == 0) {
+                if (signal.getPower() == 1) {
                     world.spawnParticles(FSParticles.SIGNAL_STEP, pos.x, pos.y, pos.z, 40, 0, 0, 0, 0.1);
                     world.playSound((PlayerEntity) null, pos.x, pos.y, pos.z, SoundEvents.BLOCK_SCULK_SENSOR_BREAK, SoundCategory.BLOCKS, 2, 1);
                     removeSignal(signal);
+                    return;
                 }
-                else{
-                    world.spawnParticles(FSParticles.SIGNAL_STEP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
-                }
+
+                // Signal continues to next block
+                world.spawnParticles(FSParticles.SIGNAL_STEP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+                signal.step();
             }
-//            Vec3d pos = signal.getWorldPos();
-//            world.spawnParticles(ParticleTypes.SCULK_CHARGE_POP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
         });
         updateSignals();
     }

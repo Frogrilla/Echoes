@@ -6,8 +6,11 @@ import com.frogrilla.frog_signals.signals.SignalManager;
 import com.frogrilla.frog_signals.signals.persistentManagerState;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.state.property.EnumProperty;
@@ -48,21 +51,20 @@ public class CroakingRodBlock extends Block implements ISignalInteractor{
 
         if(state.get(POWERED) != powered){
             if(powered){
-
                 ServerWorld serverWorld = (ServerWorld)world;
                 Vec3d position = pos.toCenterPos();
                 serverWorld.spawnParticles(FSParticles.SIGNAL_STEP, position.x, position.y, position.z, 10, 0, 0, 0, 0.01);
+                serverWorld.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_FROG_AMBIENT, SoundCategory.BLOCKS);
 
                 SignalManager manager = persistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
-                manager.addSignal(new Signal(pos.offset(state.get(FACING)), state.get(FACING), world.getReceivedRedstonePower(pos)));
+                manager.addSignal(new Signal(pos.offset(state.get(FACING)), world.getReceivedRedstonePower(pos), state.get(FACING)));
             }
             world.setBlockState(pos, state.with(POWERED, powered));
         }
     }
 
     @Override
-    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld) {
-        BlockState state = serverWorld.getBlockState(incoming.getBlockPos());
+    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
         if(state.get(POWERED)){
             manager.removeSignal(incoming);
         }
@@ -70,7 +72,7 @@ public class CroakingRodBlock extends Block implements ISignalInteractor{
             Direction facing = state.get(FACING);
             incoming.setBlockPos(incoming.getBlockPos().offset(facing));
             incoming.setDirection(facing);
-            incoming.setPower(16);
+            incoming.setPower(SignalManager.defaultPower);
         }
     }
 }

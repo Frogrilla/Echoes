@@ -77,8 +77,7 @@ public class TuffBlockerBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld) {
-        BlockState state = serverWorld.getBlockState(incoming.getBlockPos());
+    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
         if(state.get(getPropertyFromDirection(incoming.getDirection().getOpposite()))){
             serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.ENTITY_MAGMA_CUBE_HURT_SMALL, SoundCategory.BLOCKS, 1, 1);
             incoming.step();

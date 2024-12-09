@@ -10,30 +10,34 @@ public class Signal {
 
     private BlockPos blockPos;
     private Direction direction;
-    private int power;
+    private int frequency;
+    private int power = SignalManager.defaultPower;
     private int counter = 0;
 
-    public Signal(BlockPos blockPos, Direction direction, int power){
-        this.power = power;
-        this.direction = direction;
+    public Signal(BlockPos blockPos, int frequency, Direction direction){
         this.blockPos = blockPos;
+        this.frequency = frequency;
+        this.direction = direction;
     }
 
     public BlockPos getBlockPos() { return blockPos; }
-    public void  setBlockPos(BlockPos blockPos) { this.blockPos = blockPos; }
-
-    public Direction getDirection() {return direction; }
-    public void  setDirection(Direction direction) { this.direction = direction; }
+    public void setBlockPos(BlockPos blockPos) { this.blockPos = blockPos; }
 
     public int getPower() { return power; }
-    public void  setPower(int power) { this.power = power; }
+    public void setPower(int power) { this.power = power; }
+
+    public int getFrequency() { return frequency; }
+    public void setFrequency(int frequency) { this.frequency = frequency; }
+
+    public Direction getDirection() {return direction; }
+    public void setDirection(Direction direction) { this.direction = direction; }
 
     public int getCounter() { return counter; }
+    public void setCounter(int counter) { this.counter = counter; }
 
-    public boolean increment(){
+    public void increment(){
         counter++;
         counter %= SignalManager.ticksPerStep;
-        return counter == 0;
     }
 
     public void step() {
@@ -49,18 +53,21 @@ public class Signal {
         NbtCompound compound = new NbtCompound();
         compound.putLong("pos", this.blockPos.asLong());
         compound.putInt("power", this.power);
-        compound.putInt("counter", this.counter);
+        compound.putInt("frequency", this.frequency);
         compound.putInt("direction", direction.getId());
+        compound.putInt("counter", this.counter);
         return compound;
     }
 
     public static Signal fromCompound(NbtCompound compound){
         Signal signal = new Signal(
                 BlockPos.fromLong(compound.getLong("pos")),
-                Direction.byId(compound.getInt("direction")),
-                compound.getInt("power"));
+                compound.getInt("frequency"),
+                Direction.byId(compound.getInt("direction"))
+        );
 
-        signal.counter = compound.getInt("counter");
+        signal.setPower(compound.getInt("power"));
+        signal.setCounter(compound.getInt("counter"));
         return signal;
     }
 }
