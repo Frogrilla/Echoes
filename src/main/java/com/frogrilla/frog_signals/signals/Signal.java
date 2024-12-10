@@ -49,6 +49,11 @@ public class Signal {
         return new Vec3d(blockPos.getX()+0.5, blockPos.getY()+0.5, blockPos.getZ()+0.5).add(direction.getDoubleVector().multiply(((double) counter /SignalManager.ticksPerStep) - 1));
     }
 
+    @Override
+    public String toString() {
+        return String.format("%s, %s, %s, %s, %s", blockPos.toShortString(), frequency, direction, power, counter);
+    }
+
     public NbtCompound asCompound(){
         NbtCompound compound = new NbtCompound();
         compound.putLong("pos", this.blockPos.asLong());

@@ -37,7 +37,7 @@ public class SignalManager {
             if(!world.isPosLoaded(signal.getBlockPos())) return;
             signal.increment();
             if(signal.getCounter() == 0){
-                FrogSignals.LOGGER.info("Signal process: ${signal}");
+                FrogSignals.LOGGER.info("Signal process: " + signal);
                 BlockState state = world.getBlockState(signal.getBlockPos());
 
                 // Signal disrupted by interactor
