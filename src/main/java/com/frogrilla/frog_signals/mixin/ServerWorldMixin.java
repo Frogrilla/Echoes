@@ -16,6 +16,8 @@ public class ServerWorldMixin {
 
     @Inject(at = @At("TAIL"), method = "tick")
     public void tick(BooleanSupplier shouldKeepTicking, CallbackInfo info){
-        persistentManagerState.getServerWorldState(serverWorld).signalManager.tickSignals(serverWorld);
+        if(serverWorld.getTickManager().shouldTick()) {
+            persistentManagerState.getServerWorldState(serverWorld).signalManager.tickSignals(serverWorld);
+        }
     }
 }
