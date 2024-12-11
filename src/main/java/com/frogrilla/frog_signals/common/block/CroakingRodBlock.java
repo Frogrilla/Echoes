@@ -22,6 +22,8 @@ import net.minecraft.world.World;
 import net.minecraft.world.block.WireOrientation;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
+
 public class CroakingRodBlock extends Block implements ISignalInteractor{
 
     public static final EnumProperty<Direction> FACING = Properties.FACING;
@@ -47,7 +49,15 @@ public class CroakingRodBlock extends Block implements ISignalInteractor{
     @Override
     protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
         if(world.isClient()) return;
-        boolean powered = world.isReceivingRedstonePower(pos);
+
+        int power = 0;
+        for (Direction direction : DIRECTIONS) {
+            if(direction == state.get(FACING)) continue;
+            BlockPos check = pos.offset(direction);
+            power = Math.max(power, world.getEmittedRedstonePower(check, direction.getOpposite()));
+        }
+
+        boolean powered = power > 0;
 
         if(state.get(POWERED) != powered){
             if(powered){
@@ -57,7 +67,7 @@ public class CroakingRodBlock extends Block implements ISignalInteractor{
                 serverWorld.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_FROG_AMBIENT, SoundCategory.BLOCKS);
 
                 SignalManager manager = persistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
-                manager.addSignal(new Signal(pos.offset(state.get(FACING)), world.getReceivedRedstonePower(pos), state.get(FACING)));
+                manager.addSignal(new Signal(pos.offset(state.get(FACING)), power, state.get(FACING)));
             }
             world.setBlockState(pos, state.with(POWERED, powered));
         }
