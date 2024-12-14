@@ -5,14 +5,13 @@ import com.frogrilla.frog_signals.common.block.ISignalInteractor;
 import com.frogrilla.frog_signals.common.init.FSParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class SignalManager {
@@ -33,11 +32,11 @@ public class SignalManager {
     }
 
     public void tickSignals(ServerWorld world){
+        Collections.shuffle(signals);
         signals.forEach(signal ->{
             if(!world.isPosLoaded(signal.getBlockPos())) return;
             signal.increment();
             if(signal.getCounter() == 0){
-                FrogSignals.LOGGER.info("Signal process: " + signal);
                 BlockState state = world.getBlockState(signal.getBlockPos());
 
                 // Signal disrupted by interactor
