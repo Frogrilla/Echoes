@@ -14,7 +14,7 @@ public class ServerWorldMixin {
 
     private ServerWorld serverWorld = ((ServerWorld) ((Object) this));
 
-    @Inject(at = @At("TAIL"), method = "tick")
+    @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 1), method = "tick")
     public void tick(BooleanSupplier shouldKeepTicking, CallbackInfo info){
         if(serverWorld.getTickManager().shouldTick()) {
             persistentManagerState.getServerWorldState(serverWorld).signalManager.tickSignals(serverWorld);

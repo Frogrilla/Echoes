@@ -1,10 +1,10 @@
 package com.frogrilla.frog_signals.common.block;
 
+import com.frogrilla.frog_signals.FrogSignals;
 import com.frogrilla.frog_signals.signals.Signal;
 import com.frogrilla.frog_signals.signals.SignalManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.piston.PistonBehavior;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -19,12 +19,12 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class RibbitBlock extends Block implements ISignalInteractor {
+public class BlipperBlock extends Block implements ISignalInteractor {
 
     public static final BooleanProperty TRIGGERED = Properties.TRIGGERED;
     public static final IntProperty POWER = Properties.POWER;
 
-    public RibbitBlock(Settings settings) {
+    public BlipperBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(TRIGGERED, false).with(POWER, 0));
     }
@@ -65,9 +65,9 @@ public class RibbitBlock extends Block implements ISignalInteractor {
     @Override
     public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
         if(!state.get(TRIGGERED)){
-            serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.BLOCK_FROGLIGHT_HIT, SoundCategory.BLOCKS);
+            serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.BLOCK_FROGSPAWN_BREAK, SoundCategory.BLOCKS);
             serverWorld.setBlockState(incoming.getBlockPos(), state.with(TRIGGERED, true).with(POWER, incoming.getFrequency()));
-            serverWorld.scheduleBlockTick(incoming.getBlockPos(), this, 4);
+            serverWorld.scheduleBlockTick(incoming.getBlockPos(), this, 2);
         }
 
         ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);

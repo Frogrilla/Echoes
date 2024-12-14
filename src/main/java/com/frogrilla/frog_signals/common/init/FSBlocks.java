@@ -20,7 +20,7 @@ public class FSBlocks {
 
     public static final Block CROAKING_ROD = registerBlockWithItem("croaking_rod" ,new CroakingRodBlock(AbstractBlock.Settings.copy(Blocks.LIGHTNING_ROD).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "croaking_rod")))));
 
-    public static final Block RIBBIT_BLOCK = registerBlockWithItem("ribbit_block" ,new RibbitBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_TUFF).pistonBehavior(PistonBehavior.BLOCK).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "ribbit_block")))));
+    public static final Block BlIPPER = registerBlockWithItem("blipper" ,new BlipperBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_TUFF).pistonBehavior(PistonBehavior.BLOCK).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "blipper")))));
 
     public static final Block TUFF_BLOCKER = registerBlockWithItem("tuff_blocker", new TuffBlockerBlock(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "tuff_blocker")))));
 
