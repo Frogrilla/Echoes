@@ -13,5 +13,7 @@ public class FrogSignalsClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ParticleFactoryRegistry.getInstance().register(FSParticles.SIGNAL_STEP, SculkChargePopParticle.Factory::new);
+		BlockRenderLayerMap.INSTANCE.putBlock(FSBlocks.REFLECTOR, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(FSBlocks.CROAKING_ROD, RenderLayer.getCutout());
 	}
 }

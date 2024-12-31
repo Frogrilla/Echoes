@@ -22,6 +22,7 @@ public class FSItemGroups {
                         add(FSBlocks.CROAKING_ROD.asItem().getDefaultStack());
                         add(FSBlocks.BlIPPER.asItem().getDefaultStack());
                         add(FSBlocks.RIBBYTE.asItem().getDefaultStack());
+                        add(FSBlocks.REFLECTOR.asItem().getDefaultStack());
                         add(FSBlocks.TUFF_BLOCKER.asItem().getDefaultStack());
                         add(FSBlocks.OCHRE_FLIP_FROG.asItem().getDefaultStack());
                         add(FSBlocks.VERDANT_FLIP_FROG.asItem().getDefaultStack());

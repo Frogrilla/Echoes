@@ -1,0 +1,53 @@
+{
+  "multipart": [
+    {
+      "when": {"facing": "up"},
+      "apply":{"model": "frog-signals:block/redirector"}
+    },
+    {
+      "when": {"facing": "down"},
+      "apply":{"model": "frog-signals:block/redirector", "x": 180}
+    },
+    {
+      "when": {"facing": "north"},
+      "apply":{"model": "frog-signals:block/redirector", "x": 90}
+    },
+    {
+      "when": {"facing": "east"},
+      "apply":{"model": "frog-signals:block/redirector", "x": 90, "y": 90}
+    },
+    {
+      "when": {"facing": "south"},
+      "apply":{"model": "frog-signals:block/redirector", "x": 90, "y": 180}
+    },
+    {
+      "when": {"facing": "west"},
+      "apply":{"model": "frog-signals:block/redirector", "x": 90, "y": 270}
+    },
+
+    {
+      "when": {"up": "false"},
+      "apply":{"model": "frog-signals:block/redirector_circle"}
+    },
+    {
+      "when": {"down": "false"},
+      "apply":{"model": "frog-signals:block/redirector_circle", "x": 180}
+    },
+    {
+      "when": {"north": "false"},
+      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90}
+    },
+    {
+      "when": {"east": "false"},
+      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90, "y": 90}
+    },
+    {
+      "when": {"south": "false"},
+      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90, "y": 180}
+    },
+    {
+      "when": {"west": "false"},
+      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90, "y": 270}
+    }
+  ]
+}

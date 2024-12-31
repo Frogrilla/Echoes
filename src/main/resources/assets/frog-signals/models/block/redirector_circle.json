@@ -1,0 +1,22 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "frog-signals:block/redirector_circle",
+		"particle": "block/polished_tuff"
+	},
+	"elements": [
+		{
+			"from": [4.98, 11.98, 4.98],
+			"to": [11.02, 12.02, 11.02],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 6, 0], "rotation": 180, "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 6], "rotation": 270, "texture": "#1"},
+				"south": {"uv": [0, 0, 6, 0], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 6], "rotation": 90, "texture": "#1"},
+				"up": {"uv": [0, 0, 16, 16], "rotation": 180, "texture": "#1"},
+				"down": {"uv": [0, 0, 6, 6], "texture": "#1"}
+			}
+		}
+	]
+}

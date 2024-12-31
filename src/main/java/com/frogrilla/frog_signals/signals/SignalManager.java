@@ -5,6 +5,7 @@ import com.frogrilla.frog_signals.common.block.ISignalInteractor;
 import com.frogrilla.frog_signals.common.init.FSParticles;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -49,14 +50,14 @@ public class SignalManager {
 
                 // Signal ends
                 if (signal.getPower() == 1) {
-                    world.spawnParticles(FSParticles.SIGNAL_STEP, pos.x, pos.y, pos.z, 40, 0, 0, 0, 0.1);
+                    world.spawnParticles(ParticleTypes.SCULK_CHARGE_POP, pos.x, pos.y, pos.z, 40, 0, 0, 0, 0.1);
                     world.playSound((PlayerEntity) null, pos.x, pos.y, pos.z, SoundEvents.BLOCK_SCULK_SENSOR_BREAK, SoundCategory.BLOCKS, 2, 1);
                     removeSignal(signal);
                     return;
                 }
 
                 // Signal continues to next block
-                world.spawnParticles(FSParticles.SIGNAL_STEP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+                world.spawnParticles(ParticleTypes.SCULK_CHARGE_POP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
                 signal.step();
             }
         });

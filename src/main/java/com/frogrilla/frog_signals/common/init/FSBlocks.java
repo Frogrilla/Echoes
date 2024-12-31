@@ -24,6 +24,8 @@ public class FSBlocks {
 
     public static final Block RIBBYTE = registerBlockWithItem("ribbyte", new RibbyteBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_TUFF).solidBlock(Blocks::never).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "ribbyte")))));
 
+    public static final Block REFLECTOR = registerBlockWithItem("reflector", new ReflectorBlock(AbstractBlock.Settings.copy(Blocks.GLASS).solidBlock(Blocks::never).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "reflector")))));
+
     public static final Block TUFF_BLOCKER = registerBlockWithItem("tuff_blocker", new TuffBlockerBlock(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "tuff_blocker")))));
 
     public static final Block OCHRE_FLIP_FROG = registerBlockWithItem("ochre_flip_frog", new FlipFrogBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_TUFF).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(FrogSignals.MOD_ID, "ochre_flip_frog")))));
