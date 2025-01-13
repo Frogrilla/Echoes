@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "frog-signals:block/echo_heart_top",
+    "side": "frog-signals:block/echo_heart_side"
+  }
+}

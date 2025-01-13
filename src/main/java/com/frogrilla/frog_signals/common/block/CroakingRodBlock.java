@@ -64,7 +64,7 @@ public class CroakingRodBlock extends RodBlock implements ISignalInteractor{
 
     public static void doEffects(ServerWorld world, BlockPos pos, Direction direction){
         Vec3d position = pos.toCenterPos().add(direction.getDoubleVector().multiply(0.365d));
-        world.spawnParticles(ParticleTypes.SONIC_BOOM, position.x, position.y, position.z, 1, 0, 0, 0, 0);
+        //world.spawnParticles(ParticleTypes.SONIC_BOOM, position.x, position.y, position.z, 1, 0, 0, 0, 0);
         world.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_FROG_AMBIENT, SoundCategory.BLOCKS);
     }
 

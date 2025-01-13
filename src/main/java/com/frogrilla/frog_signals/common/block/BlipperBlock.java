@@ -5,6 +5,7 @@ import com.frogrilla.frog_signals.signals.Signal;
 import com.frogrilla.frog_signals.signals.SignalManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.PillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
@@ -19,7 +20,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BlipperBlock extends Block implements ISignalInteractor {
+public class BlipperBlock extends PillarBlock implements ISignalInteractor {
 
     public static final BooleanProperty TRIGGERED = Properties.TRIGGERED;
     public static final IntProperty POWER = Properties.POWER;
@@ -31,6 +32,7 @@ public class BlipperBlock extends Block implements ISignalInteractor {
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+        super.appendProperties(builder);
         builder.add(TRIGGERED);
         builder.add(POWER);
     }
