@@ -1,46 +1,33 @@
 package com.frogrilla.frog_signals.common.block;
 
-import com.frogrilla.frog_signals.common.init.FSParticles;
 import com.frogrilla.frog_signals.signals.Signal;
 import com.frogrilla.frog_signals.signals.SignalManager;
 import com.frogrilla.frog_signals.signals.persistentManagerState;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.LightningRodBlock;
 import net.minecraft.block.RodBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.BooleanProperty;
-import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.util.function.BooleanBiFunction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.shape.VoxelShape;
-import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.World;
 import net.minecraft.world.block.WireOrientation;
-import net.minecraft.world.event.GameEvent;
-import net.minecraft.world.event.Vibrations;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3d;
 
-import java.util.Arrays;
-import java.util.stream.Stream;
+public class EchoRodBlock extends RodBlock implements ISignalInteractor{
 
-public class CroakingRodBlock extends RodBlock implements ISignalInteractor{
-
-    public static final MapCodec<CroakingRodBlock> CODEC = createCodec(CroakingRodBlock::new);
+    public static final MapCodec<EchoRodBlock> CODEC = createCodec(EchoRodBlock::new);
     public static final BooleanProperty POWERED = Properties.POWERED;
 
-    public CroakingRodBlock(Settings settings) {
+    public EchoRodBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(FACING, Direction.UP).with(POWERED, false));
     }

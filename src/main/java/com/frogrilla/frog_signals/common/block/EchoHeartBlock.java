@@ -1,6 +1,5 @@
 package com.frogrilla.frog_signals.common.block;
 
-import com.frogrilla.frog_signals.FrogSignals;
 import com.frogrilla.frog_signals.signals.Signal;
 import com.frogrilla.frog_signals.signals.SignalManager;
 import net.minecraft.block.Block;
@@ -20,12 +19,12 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-public class BlipperBlock extends PillarBlock implements ISignalInteractor {
+public class EchoHeartBlock extends PillarBlock implements ISignalInteractor {
 
     public static final BooleanProperty TRIGGERED = Properties.TRIGGERED;
     public static final IntProperty POWER = Properties.POWER;
 
-    public BlipperBlock(Settings settings) {
+    public EchoHeartBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState().with(TRIGGERED, false).with(POWER, 0));
     }

@@ -1,9 +1,6 @@
 package com.frogrilla.frog_signals;
 
-import com.frogrilla.frog_signals.common.init.FSCommands;
-import com.frogrilla.frog_signals.common.init.FSBlocks;
-import com.frogrilla.frog_signals.common.init.FSItemGroups;
-import com.frogrilla.frog_signals.common.init.FSParticles;
+import com.frogrilla.frog_signals.common.init.*;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -16,6 +13,7 @@ public class FrogSignals implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		FSBlocks.registerBlocks();
+		FSItems.registerItems();
 		FSParticles.registerParticles();
 		FSCommands.registerCommands();
 		FSItemGroups.registerItemGroups();

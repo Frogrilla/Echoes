@@ -14,11 +14,11 @@ import net.minecraft.world.World;
 import net.minecraft.world.block.WireOrientation;
 import org.jetbrains.annotations.Nullable;
 
-public class RibbyteBlock extends Block implements ISignalInteractor {
+public class EchoLatchBlock extends Block implements ISignalInteractor {
 
     public static final IntProperty FREQUENCY = IntProperty.of("frequency", 0, 15);
     public static final BooleanProperty POWERED = Properties.POWERED;
-    public RibbyteBlock(Settings settings) {
+    public EchoLatchBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState()
                 .with(FREQUENCY, 0)

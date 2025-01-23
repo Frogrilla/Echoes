@@ -12,21 +12,20 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 
 public class FSItemGroups {
-    public static final ItemGroup FROG_SIGNALS_TECHNOLOGY = registerItemGroup("frog_signals_technology", FabricItemGroup.builder()
-            .icon(() -> new ItemStack(FSBlocks.OCHRE_FLIP_FROG.asItem()))
-            .displayName(Text.translatable("itemGroup.frog_signals.frog_signals_technology"))
+    public static final ItemGroup FROG_SIGNALS_TECHNOLOGY = registerItemGroup("frog_signals", FabricItemGroup.builder()
+            .icon(() -> new ItemStack(FSItems.ECHO_DUST))
+            .displayName(Text.translatable("itemGroup.frog_signals.frog_signals"))
             .entries((context, entries) -> {
                 entries.addAll(new ArrayList<>() {
                     {
-                        add(FSBlocks.SIGNAL_TEST_BLOCK.asItem().getDefaultStack());
-                        add(FSBlocks.CROAKING_ROD.asItem().getDefaultStack());
-                        add(FSBlocks.BlIPPER.asItem().getDefaultStack());
-                        add(FSBlocks.RIBBYTE.asItem().getDefaultStack());
+                        add(FSBlocks.ECHO_ROD.asItem().getDefaultStack());
+                        add(FSBlocks.ECHO_HEART.asItem().getDefaultStack());
+                        add(FSBlocks.ECHO_LATCH.asItem().getDefaultStack());
+                        add(FSBlocks.FLIP_FROG.asItem().getDefaultStack());
                         add(FSBlocks.REFLECTOR.asItem().getDefaultStack());
                         add(FSBlocks.TUFF_BLOCKER.asItem().getDefaultStack());
-                        add(FSBlocks.OCHRE_FLIP_FROG.asItem().getDefaultStack());
-                        add(FSBlocks.VERDANT_FLIP_FROG.asItem().getDefaultStack());
-                        add(FSBlocks.PEARLESCENT_FLIP_FROG.asItem().getDefaultStack());
+                        add(FSItems.ECHO_DUST.getDefaultStack());
+                        add(FSBlocks.SIGNAL_TEST_BLOCK.asItem().getDefaultStack());
                     }
                 });
             })
