@@ -1,8 +1,8 @@
 	{
 	"credit": "Made with Blockbench",
 	"textures": {
-		"base": "frog-signals:block/tuff_blocker",
-		"particle": "frog-signals:block/tuff_blocker"
+		"base": "frog-signals:block/echo_blocker",
+		"particle": "frog-signals:block/echo_blocker"
 	},
 	"elements": [
 		{

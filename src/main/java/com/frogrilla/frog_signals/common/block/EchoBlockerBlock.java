@@ -1,5 +1,6 @@
 package com.frogrilla.frog_signals.common.block;
 
+import com.frogrilla.frog_signals.common.init.FSItems;
 import com.frogrilla.frog_signals.signals.Signal;
 import com.frogrilla.frog_signals.signals.SignalManager;
 import net.minecraft.block.Block;
@@ -20,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public class TuffBlockerBlock extends Block implements ISignalInteractor {
+public class EchoBlockerBlock extends Block implements ISignalInteractor {
 
     public static final BooleanProperty UP = BooleanProperty.of("up");
     public static final BooleanProperty DOWN = BooleanProperty.of("down");
@@ -29,7 +30,7 @@ public class TuffBlockerBlock extends Block implements ISignalInteractor {
     public static final BooleanProperty SOUTH = BooleanProperty.of("south");
     public static final BooleanProperty WEST = BooleanProperty.of("west");
 
-    public TuffBlockerBlock(Settings settings) {
+    public EchoBlockerBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState()
                 .with(UP, false)
@@ -103,8 +104,8 @@ public class TuffBlockerBlock extends Block implements ISignalInteractor {
                 return ActionResult.CONSUME;
             }
         }
-        else if(stack.getItem() == Items.MAGMA_CREAM){
-            world.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_SLIME_BLOCK_PLACE, SoundCategory.BLOCKS, 1, 1);
+        else if(stack.getItem() == FSItems.ECHO_DUST){
+            world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_DYE_USE, SoundCategory.BLOCKS, 1, 1);
             world.setBlockState(pos, state.with(property, true));
             return ActionResult.CONSUME;
         }

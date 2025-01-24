@@ -23,7 +23,7 @@ public class FSItemGroups {
                         add(FSBlocks.ECHO_LATCH.asItem().getDefaultStack());
                         add(FSBlocks.FLIP_FROG.asItem().getDefaultStack());
                         add(FSBlocks.REFLECTOR.asItem().getDefaultStack());
-                        add(FSBlocks.TUFF_BLOCKER.asItem().getDefaultStack());
+                        add(FSBlocks.ECHO_BLOCKER.asItem().getDefaultStack());
                         add(FSItems.ECHO_DUST.getDefaultStack());
                         add(FSBlocks.SIGNAL_TEST_BLOCK.asItem().getDefaultStack());
                     }

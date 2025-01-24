@@ -3,41 +3,41 @@
     {
       "when": {"north": false},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face"
+        "model": "frog-signals:block/echo_blocker_face"
       }
     },
     {
       "when": {"east": false},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face",
+        "model": "frog-signals:block/echo_blocker_face",
         "y": 90
       }
     },
     {
       "when": {"south": false},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face",
+        "model": "frog-signals:block/echo_blocker_face",
         "y": 180
       }
     },
     {
       "when": {"west": false},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face",
+        "model": "frog-signals:block/echo_blocker_face",
         "y": 270
       }
     },
     {
       "when": {"up": false},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face",
+        "model": "frog-signals:block/echo_blocker_face",
         "x": 270
       }
     },
     {
       "when": {"down": false},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face",
+        "model": "frog-signals:block/echo_blocker_face",
         "x": 90
       }
     },
@@ -45,41 +45,41 @@
     {
       "when": {"north": true},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face_magma"
+        "model": "frog-signals:block/echo_blocker_face_dusted"
       }
     },
     {
       "when": {"east": true},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "model": "frog-signals:block/echo_blocker_face_dusted",
         "y": 90
       }
     },
     {
       "when": {"south": true},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "model": "frog-signals:block/echo_blocker_face_dusted",
         "y": 180
       }
     },
     {
       "when": {"west": true},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "model": "frog-signals:block/echo_blocker_face_dusted",
         "y": 270
       }
     },
     {
       "when": {"up": true},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "model": "frog-signals:block/echo_blocker_face_dusted",
         "x": 270
       }
     },
     {
       "when": {"down": true},
       "apply": {
-        "model": "frog-signals:block/tuff_blocker_face_magma",
+        "model": "frog-signals:block/echo_blocker_face_dusted",
         "x": 90
       }
     }

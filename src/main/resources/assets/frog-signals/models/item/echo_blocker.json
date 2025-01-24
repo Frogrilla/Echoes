@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "frog-signals:block/tuff_blocker"
+    "all": "frog-signals:block/echo_blocker"
   }
 }
