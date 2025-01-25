@@ -1,0 +1,6 @@
+{
+	"parent": "frog-signals:block/echo_blocker_face",
+	"textures": {
+		"base": "frog-signals:block/echo_blocker_dusted"
+	}
+}

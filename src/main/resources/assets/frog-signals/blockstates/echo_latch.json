@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "frequency=0": {"model": "frog-signals:block/echo_latch" },
+    "frequency=1": {"model": "frog-signals:block/echo_latch_1" },
+    "frequency=2": {"model": "frog-signals:block/echo_latch_2" },
+    "frequency=3": {"model": "frog-signals:block/echo_latch_3" },
+    "frequency=4": {"model": "frog-signals:block/echo_latch_4" },
+    "frequency=5": {"model": "frog-signals:block/echo_latch_5" },
+    "frequency=6": {"model": "frog-signals:block/echo_latch_6" },
+    "frequency=7": {"model": "frog-signals:block/echo_latch_7" },
+    "frequency=8": {"model": "frog-signals:block/echo_latch_8" },
+    "frequency=9": {"model": "frog-signals:block/echo_latch_9" },
+    "frequency=10": {"model": "frog-signals:block/echo_latch_10" },
+    "frequency=11": {"model": "frog-signals:block/echo_latch_11" },
+    "frequency=12": {"model": "frog-signals:block/echo_latch_12" },
+    "frequency=13": {"model": "frog-signals:block/echo_latch_13" },
+    "frequency=14": {"model": "frog-signals:block/echo_latch_14" },
+    "frequency=15": {"model": "frog-signals:block/echo_latch_15" }
+  }
+}

@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "enabled=false": {"model": "frog-signals:block/verdant_flip_frog" },
-    "enabled=true": {"model": "frog-signals:block/verdant_flip_frog_enabled" }
-  }
-}

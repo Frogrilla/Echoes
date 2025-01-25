@@ -17,28 +17,28 @@ import net.minecraft.world.BlockView;
 
 public class FlipFrogBlock extends Block implements ISignalInteractor {
 
-    public static final BooleanProperty ENABLED = Properties.ENABLED;
+    public static final BooleanProperty TRIGGERED = Properties.TRIGGERED;
 
     public FlipFrogBlock(Settings settings) {
         super(settings);
-        setDefaultState(getDefaultState().with(ENABLED, false));
+        setDefaultState(getDefaultState().with(TRIGGERED, false));
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-        builder.add(ENABLED);
+        builder.add(TRIGGERED);
     }
 
     @Override
     public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
-        if(state.get(ENABLED)){
+        if(state.get(TRIGGERED)){
             serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.BLOCK_COPPER_BULB_TURN_OFF, SoundCategory.BLOCKS, 2, 1);
         }
         else{
             serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.BLOCK_COPPER_BULB_TURN_ON, SoundCategory.BLOCKS, 2, 1);
         }
 
-        serverWorld.setBlockState(incoming.getBlockPos(), serverWorld.getBlockState(incoming.getBlockPos()).cycle(ENABLED));
+        serverWorld.setBlockState(incoming.getBlockPos(), serverWorld.getBlockState(incoming.getBlockPos()).cycle(TRIGGERED));
         ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
     }
 
@@ -49,7 +49,7 @@ public class FlipFrogBlock extends Block implements ISignalInteractor {
 
     @Override
     protected int getWeakRedstonePower(BlockState state, BlockView world, BlockPos pos, Direction direction) {
-        return state.get(ENABLED) ? 15 : 0;
+        return state.get(TRIGGERED) ? 15 : 0;
     }
 
 }
