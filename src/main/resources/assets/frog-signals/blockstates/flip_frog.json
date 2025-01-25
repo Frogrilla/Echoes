@@ -1,6 +1,6 @@
 {
   "variants": {
-    "enabled=false": {"model": "frog-signals:block/ochre_flip_frog" },
-    "enabled=true": {"model": "frog-signals:block/ochre_flip_frog_enabled" }
+    "triggered=false": {"model": "frog-signals:block/flip_frog" },
+    "triggered=true": {"model": "frog-signals:block/flip_frog_triggered" }
   }
 }
