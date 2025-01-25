@@ -25,7 +25,6 @@ public class FSItemGroups {
                         add(FSBlocks.REFLECTOR.asItem().getDefaultStack());
                         add(FSBlocks.ECHO_BLOCKER.asItem().getDefaultStack());
                         add(FSItems.ECHO_DUST.getDefaultStack());
-                        add(FSBlocks.SIGNAL_TEST_BLOCK.asItem().getDefaultStack());
                     }
                 });
             })

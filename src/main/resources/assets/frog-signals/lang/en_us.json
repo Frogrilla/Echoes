@@ -5,7 +5,9 @@
   "item.frog-signals.flip_frog": "Flip Frog",
   "item.frog-signals.reflector": "Reflector",
   "item.frog-signals.echo_blocker": "Echo Blocker",
+
   "item.frog-signals.signal_test_block": "Signal Test Block",
+  "item.frog-signals.corrupted_echo_rod": "Corrupted Echo Rod",
 
   "item.frog-signals.echo_dust": "Echo Dust",
 
