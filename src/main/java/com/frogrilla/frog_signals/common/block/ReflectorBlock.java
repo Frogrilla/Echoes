@@ -21,35 +21,23 @@ import org.jetbrains.annotations.Nullable;
 public class ReflectorBlock extends Block implements ISignalInteractor {
 
     public static final Property<Direction> FACING = Properties.FACING;
-    public static final BooleanProperty UP = BooleanProperty.of("up");
-    public static final BooleanProperty DOWN = BooleanProperty.of("down");
-    public static final BooleanProperty NORTH = BooleanProperty.of("north");
-    public static final BooleanProperty EAST = BooleanProperty.of("east");
-    public static final BooleanProperty SOUTH = BooleanProperty.of("south");
-    public static final BooleanProperty WEST = BooleanProperty.of("west");
+    public static final BooleanProperty SIDE_A = BooleanProperty.of("side_a");
+    public static final BooleanProperty SIDE_B = BooleanProperty.of("side_b");
 
     public ReflectorBlock(Settings settings) {
         super(settings);
         setDefaultState(getDefaultState()
                 .with(FACING, Direction.UP)
-                .with(UP, true)
-                .with(DOWN, true)
-                .with(NORTH, true)
-                .with(EAST, true)
-                .with(SOUTH, true)
-                .with(WEST, true)
+                .with(SIDE_A, true)
+                .with(SIDE_B, true)
         );
     }
 
     @Override
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
-        builder.add(UP);
-        builder.add(DOWN);
-        builder.add(NORTH);
-        builder.add(EAST);
-        builder.add(SOUTH);
-        builder.add(WEST);
+        builder.add(SIDE_A);
+        builder.add(SIDE_B);
     }
 
     @Nullable
@@ -62,8 +50,7 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
         else{
             state = state.with(FACING, ctx.getSide());
         }
-
-        state = state.with(getPropertyFromDirection(ctx.getSide()), false).with(getPropertyFromDirection(ctx.getSide().getOpposite()), false);
+        
         return state;
     }
 
@@ -168,34 +155,48 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
         return incoming;
     }
 
-    public static BooleanProperty getPropertyFromDirection(Direction direction){
-        switch (direction){
-            case UP -> {
-                return UP;
-            }
-            case DOWN -> {
-                return DOWN;
-            }
-            case NORTH -> {
-                return NORTH;
-            }
-            case EAST -> {
-                return EAST;
-            }
-            case SOUTH -> {
-                return SOUTH;
-            }
-            case WEST -> {
-                return WEST;
-            }
-        }
-        return UP;
+    public static BooleanProperty getPropertyFromDirection(Direction facing, Direction incoming){
+        if(facing.getAxis() == incoming.getAxis()) return SIDE_A;
+
+        return switch (facing) {
+            case UP -> switch (incoming) {
+                case SOUTH, WEST -> SIDE_A;
+                case NORTH, EAST -> SIDE_B;
+                default -> null;
+            };
+            case DOWN -> switch (incoming) {
+                case NORTH, WEST -> SIDE_A;
+                case SOUTH, EAST -> SIDE_B;
+                default -> null;
+            };
+            case NORTH -> switch (incoming) {
+                case UP, WEST -> SIDE_A;
+                case DOWN, EAST -> SIDE_B;
+                default -> null;
+            };
+            case SOUTH -> switch (incoming) {
+                case UP, EAST -> SIDE_A;
+                case DOWN, WEST -> SIDE_B;
+                default -> null;
+            };
+            case EAST -> switch (incoming) {
+                case NORTH, UP -> SIDE_A;
+                case SOUTH, DOWN -> SIDE_B;
+                default -> null;
+            };
+            case WEST -> switch (incoming) {
+                case SOUTH, UP -> SIDE_A;
+                case NORTH, DOWN -> SIDE_B;
+                default -> null;
+            };
+        };
+
     }
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
         if(state.get(FACING).getAxis() != hit.getSide().getAxis()){
-            BooleanProperty side = getPropertyFromDirection(hit.getSide());
+            BooleanProperty side = getPropertyFromDirection(state.get(FACING), hit.getSide());
             world.setBlockState(pos, state.cycle(side));
 
             return ActionResult.SUCCESS;
@@ -205,7 +206,12 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
 
     @Override
     public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
-        BooleanProperty side = getPropertyFromDirection(incoming.getDirection().getOpposite());
+        if(incoming.getDirection().getAxis() == state.get(FACING).getAxis()) {
+            manager.removeSignal(incoming);
+            return;
+        }
+
+        BooleanProperty side = getPropertyFromDirection(state.get(FACING), incoming.getDirection().getOpposite());
         if(state.get(side)){
             incoming.setDirection(getReflectionDirection(state.get(FACING), incoming.getDirection()));
         }

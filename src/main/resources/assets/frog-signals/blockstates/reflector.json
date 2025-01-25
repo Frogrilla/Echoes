@@ -2,52 +2,128 @@
   "multipart": [
     {
       "when": {"facing": "up"},
-      "apply":{"model": "frog-signals:block/redirector"}
+      "apply":{"model": "frog-signals:block/reflector_frame"}
     },
     {
       "when": {"facing": "down"},
-      "apply":{"model": "frog-signals:block/redirector", "x": 180}
+      "apply":{"model": "frog-signals:block/reflector_frame", "x": 180}
     },
     {
       "when": {"facing": "north"},
-      "apply":{"model": "frog-signals:block/redirector", "x": 90}
+      "apply":{"model": "frog-signals:block/reflector_frame", "x": 90}
     },
     {
       "when": {"facing": "east"},
-      "apply":{"model": "frog-signals:block/redirector", "x": 90, "y": 90}
+      "apply":{"model": "frog-signals:block/reflector_frame", "x": 90, "y": 90}
     },
     {
       "when": {"facing": "south"},
-      "apply":{"model": "frog-signals:block/redirector", "x": 90, "y": 180}
+      "apply":{"model": "frog-signals:block/reflector_frame", "x": 90, "y": 180}
     },
     {
       "when": {"facing": "west"},
-      "apply":{"model": "frog-signals:block/redirector", "x": 90, "y": 270}
+      "apply":{"model": "frog-signals:block/reflector_frame", "x": 90, "y": 270}
     },
 
     {
-      "when": {"up": "false"},
-      "apply":{"model": "frog-signals:block/redirector_circle"}
+      "when": {"facing": "up", "side_a": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect"}
     },
     {
-      "when": {"down": "false"},
-      "apply":{"model": "frog-signals:block/redirector_circle", "x": 180}
+      "when": {"facing": "down", "side_a": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect", "x": 180}
     },
     {
-      "when": {"north": "false"},
-      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90}
+      "when": {"facing": "north", "side_a": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect", "x": 90}
     },
     {
-      "when": {"east": "false"},
-      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90, "y": 90}
+      "when": {"facing": "east", "side_a": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect", "x": 90, "y": 90}
     },
     {
-      "when": {"south": "false"},
-      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90, "y": 180}
+      "when": {"facing": "south", "side_a": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect", "x": 90, "y": 180}
     },
     {
-      "when": {"west": "false"},
-      "apply":{"model": "frog-signals:block/redirector_circle", "x": 90, "y": 270}
+      "when": {"facing": "west", "side_a": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect", "x": 90, "y": 270}
+    },
+
+    {
+      "when": {"facing": "up", "side_a": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit"}
+    },
+    {
+      "when": {"facing": "down", "side_a": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit", "x": 180}
+    },
+    {
+      "when": {"facing": "north", "side_a": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit", "x": 90}
+    },
+    {
+      "when": {"facing": "east", "side_a": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit", "x": 90, "y": 90}
+    },
+    {
+      "when": {"facing": "south", "side_a": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit", "x": 90, "y": 180}
+    },
+    {
+      "when": {"facing": "west", "side_a": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit", "x": 90, "y": 270}
+    },
+
+    {
+      "when": {"facing": "up", "side_b": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect_back"}
+    },
+    {
+      "when": {"facing": "down", "side_b": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect_back", "x": 180}
+    },
+    {
+      "when": {"facing": "north", "side_b": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect_back", "x": 90}
+    },
+    {
+      "when": {"facing": "east", "side_b": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect_back", "x": 90, "y": 90}
+    },
+    {
+      "when": {"facing": "south", "side_b": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect_back", "x": 90, "y": 180}
+    },
+    {
+      "when": {"facing": "west", "side_b": "true"},
+      "apply":{"model": "frog-signals:block/reflector_pane_reflect_back", "x": 90, "y": 270}
+    },
+
+    {
+      "when": {"facing": "up", "side_b": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit_back"}
+    },
+    {
+      "when": {"facing": "down", "side_b": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit_back", "x": 180}
+    },
+    {
+      "when": {"facing": "north", "side_b": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit_back", "x": 90}
+    },
+    {
+      "when": {"facing": "east", "side_b": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit_back", "x": 90, "y": 90}
+    },
+    {
+      "when": {"facing": "south", "side_b": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit_back", "x": 90, "y": 180}
+    },
+    {
+      "when": {"facing": "west", "side_b": "false"},
+      "apply":{"model": "frog-signals:block/reflector_pane_transmit_back", "x": 90, "y": 270}
     }
+
   ]
 }
