@@ -1,6 +1,0 @@
-{
-  "parent": "frog-signals:block/echo_rod",
-  "textures": {
-    "shards": "frog-signals:block/echo_rod_shards_triggered"
-  }
-}

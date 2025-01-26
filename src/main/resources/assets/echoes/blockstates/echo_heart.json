@@ -1,0 +1,29 @@
+{
+  "variants": {
+    "triggered=false,axis=x": {
+      "model": "echoes:block/echo_heart_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "triggered=false,axis=y": {
+      "model": "echoes:block/echo_heart"
+    },
+    "triggered=false,axis=z": {
+      "model": "echoes:block/echo_heart_horizontal",
+      "x": 90
+    },
+
+    "triggered=true,axis=x": {
+      "model": "echoes:block/echo_heart_triggered_horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "triggered=true,axis=y": {
+      "model": "echoes:block/echo_heart_triggered"
+    },
+    "triggered=true,axis=z": {
+      "model": "echoes:block/echo_heart_triggered_horizontal",
+      "x": 90
+    }
+  }
+}

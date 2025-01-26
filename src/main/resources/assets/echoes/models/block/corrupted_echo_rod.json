@@ -1,0 +1,9 @@
+{
+  "parent": "echoes:block/echo_rod",
+  "textures": {
+    "body": "echoes:block/corrupted_echo_rod_body",
+    "shards": "echoes:block/corrupted_echo_rod_shards",
+    "overlay": "echoes:block/corrupted_echo_rod_overlay",
+    "particle": "block/nether_wart_block"
+  }
+}

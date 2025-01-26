@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column_horizontal",
-  "textures": {
-    "end": "frog-signals:block/echo_heart_top_triggered",
-    "side": "frog-signals:block/echo_heart_side_triggered"
-  }
-}

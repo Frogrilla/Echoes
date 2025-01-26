@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": {"model": "echoes:block/signal_test_block" }
+  }
+}

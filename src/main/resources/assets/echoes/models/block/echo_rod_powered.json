@@ -1,0 +1,6 @@
+{
+  "parent": "echoes:block/echo_rod",
+  "textures": {
+    "shards": "echoes:block/echo_rod_shards_triggered"
+  }
+}

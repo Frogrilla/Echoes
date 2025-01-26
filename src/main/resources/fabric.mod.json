@@ -1,34 +1,34 @@
 {
 	"schemaVersion": 1,
-	"id": "frog-signals",
+	"id": "echoes",
 	"version": "${version}",
-	"name": "Frog Signals",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Echoes",
+	"description": "A minecraft mod that adds a unique signal system, useful for making new kinds of redstone builds.",
 	"authors": [
-		"Me!"
+		"Frogrilla"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/frog-signals/icon.png",
+	"icon": "icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.frogrilla.frog_signals.FrogSignals"
+			"com.frogrilla.echoes.Echoes"
 		],
 		"client": [
-			"com.frogrilla.frog_signals.FrogSignalsClient"
+			"com.frogrilla.echoes.EchoesClient"
 		],
 		"fabric-datagen": [
-			"com.frogrilla.frog_signals.FrogSignalsDataGenerator"
+			"com.frogrilla.echoes.EchoesDataGenerator"
 		]
 	},
 	"mixins": [
-		"frog-signals.mixins.json",
+		"echoes.mixins.json",
 		{
-			"config": "frog-signals.client.mixins.json",
+			"config": "echoes.client.mixins.json",
 			"environment": "client"
 		}
 	],

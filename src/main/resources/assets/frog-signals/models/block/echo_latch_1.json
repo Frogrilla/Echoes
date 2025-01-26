@@ -1,6 +1,0 @@
-{
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "frog-signals:block/echo_latch_1"
-  }
-}

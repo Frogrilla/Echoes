@@ -1,6 +1,0 @@
-{
-	"parent": "frog-signals:block/reflector_pane_reflect",
-	"textures": {
-		"pane": "frog-signals:block/reflector_pane_transmit"
-	}
-}

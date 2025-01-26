@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "echoes:block/flip_frog_top",
+    "side": "echoes:block/flip_frog"
+  }
+}

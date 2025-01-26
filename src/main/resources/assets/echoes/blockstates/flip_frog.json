@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "triggered=false": {"model": "echoes:block/flip_frog" },
+    "triggered=true": {"model": "echoes:block/flip_frog_triggered" }
+  }
+}

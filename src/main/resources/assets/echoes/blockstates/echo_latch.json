@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "frequency=0": {"model": "echoes:block/echo_latch" },
+    "frequency=1": {"model": "echoes:block/echo_latch_1" },
+    "frequency=2": {"model": "echoes:block/echo_latch_2" },
+    "frequency=3": {"model": "echoes:block/echo_latch_3" },
+    "frequency=4": {"model": "echoes:block/echo_latch_4" },
+    "frequency=5": {"model": "echoes:block/echo_latch_5" },
+    "frequency=6": {"model": "echoes:block/echo_latch_6" },
+    "frequency=7": {"model": "echoes:block/echo_latch_7" },
+    "frequency=8": {"model": "echoes:block/echo_latch_8" },
+    "frequency=9": {"model": "echoes:block/echo_latch_9" },
+    "frequency=10": {"model": "echoes:block/echo_latch_10" },
+    "frequency=11": {"model": "echoes:block/echo_latch_11" },
+    "frequency=12": {"model": "echoes:block/echo_latch_12" },
+    "frequency=13": {"model": "echoes:block/echo_latch_13" },
+    "frequency=14": {"model": "echoes:block/echo_latch_14" },
+    "frequency=15": {"model": "echoes:block/echo_latch_15" }
+  }
+}

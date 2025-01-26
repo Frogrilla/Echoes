@@ -1,0 +1,6 @@
+{
+	"parent": "echoes:block/reflector_pane_reflect_back",
+	"textures": {
+		"pane": "echoes:block/reflector_pane_transmit"
+	}
+}

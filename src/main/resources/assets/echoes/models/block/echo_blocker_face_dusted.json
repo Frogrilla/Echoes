@@ -1,0 +1,6 @@
+{
+	"parent": "echoes:block/echo_blocker_face",
+	"textures": {
+		"base": "echoes:block/echo_blocker_dusted"
+	}
+}

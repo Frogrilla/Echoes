@@ -1,0 +1,16 @@
+{
+  "item.echoes.echo_rod": "Echo Rod",
+  "item.echoes.echo_heart": "Echo Heart",
+  "item.echoes.echo_latch": "Echo Latch",
+  "item.echoes.flip_frog": "Flip Frog",
+  "item.echoes.reflector": "Reflector",
+  "item.echoes.echo_blocker": "Echo Blocker",
+
+  "item.echoes.signal_test_block": "Signal Test Block",
+  "item.echoes.corrupted_echo_rod": "Corrupted Echo Rod",
+
+  "item.echoes.echo_dust": "Echo Dust",
+
+  "itemGroup.echoes.technology": "Echoes Technology",
+  "itemGroup.echoes.materials": "Echoes Materials"
+}

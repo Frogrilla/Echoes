@@ -1,6 +1,0 @@
-{
-  "variants": {
-    "triggered=false": {"model": "frog-signals:block/flip_frog" },
-    "triggered=true": {"model": "frog-signals:block/flip_frog_triggered" }
-  }
-}
