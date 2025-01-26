@@ -12,24 +12,34 @@ import net.minecraft.util.Identifier;
 import java.util.ArrayList;
 
 public class FSItemGroups {
-    public static final ItemGroup FROG_SIGNALS_TECHNOLOGY = registerItemGroup("frog_signals", FabricItemGroup.builder()
-            .icon(() -> new ItemStack(FSItems.ECHO_DUST))
-            .displayName(Text.translatable("itemGroup.frog_signals.frog_signals"))
-            .entries((context, entries) -> {
-                entries.addAll(new ArrayList<>() {
-                    {
-                        add(FSBlocks.ECHO_ROD.asItem().getDefaultStack());
-                        add(FSBlocks.ECHO_HEART.asItem().getDefaultStack());
-                        add(FSBlocks.ECHO_LATCH.asItem().getDefaultStack());
-                        add(FSBlocks.FLIP_FROG.asItem().getDefaultStack());
-                        add(FSBlocks.REFLECTOR.asItem().getDefaultStack());
-                        add(FSBlocks.ECHO_BLOCKER.asItem().getDefaultStack());
-                        add(FSItems.ECHO_DUST.getDefaultStack());
-                    }
-                });
-            })
-            .build()
-    );
+    public static final ItemGroup TECHNOLOGY = FabricItemGroup.builder()
+        .icon(() -> new ItemStack(FSBlocks.ECHO_ROD))
+        .displayName(Text.translatable("itemGroup.frog_signals.technology"))
+        .entries((context, entries) -> {
+            entries.addAll(new ArrayList<>() {
+                {
+                    add(FSBlocks.ECHO_ROD.asItem().getDefaultStack());
+                    add(FSBlocks.ECHO_HEART.asItem().getDefaultStack());
+                    add(FSBlocks.ECHO_LATCH.asItem().getDefaultStack());
+                    add(FSBlocks.FLIP_FROG.asItem().getDefaultStack());
+                    add(FSBlocks.REFLECTOR.asItem().getDefaultStack());
+                    add(FSBlocks.ECHO_BLOCKER.asItem().getDefaultStack());
+                }
+            });
+        })
+        .build();
+
+    public static final ItemGroup MATERIALS = FabricItemGroup.builder()
+        .icon(() -> new ItemStack(FSItems.ECHO_DUST))
+        .displayName(Text.translatable("itemGroup.frog_signals.materials"))
+        .entries((context, entries) -> {
+            entries.addAll(new ArrayList<>() {
+                {
+                    add(FSItems.ECHO_DUST.getDefaultStack());
+                }
+            });
+        })
+        .build();
 
     private static ItemGroup registerItemGroup(String name, ItemGroup group){
         return Registry.register(Registries.ITEM_GROUP, Identifier.of(FrogSignals.MOD_ID, name), group);

@@ -11,5 +11,6 @@
 
   "item.frog-signals.echo_dust": "Echo Dust",
 
-  "itemGroup.frog_signals.frog_signals": "Frog Signals"
+  "itemGroup.frog_signals.technology": "Echoes Technology",
+  "itemGroup.frog_signals.materials": "Echoes Materials"
 }
