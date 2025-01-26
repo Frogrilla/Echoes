@@ -16,18 +16,17 @@ import java.util.List;
 
 public class SignalManager {
 
-    public final static int ticksPerStep = 1;
     public final static int defaultPower = 15;
 
-    public List<Signal> signals = new ArrayList<>();
-    public List<Signal> signalBuffer = new ArrayList<>();
-    public List<Signal> signalBin = new ArrayList<>();
+    public List<ISignal> signals = new ArrayList<>();
+    public List<ISignal> signalBuffer = new ArrayList<>();
+    public List<ISignal> signalBin = new ArrayList<>();
 
-    public void addSignal(Signal signal){
+    public void addSignal(ISignal signal){
         signalBuffer.add(signal);
     }
 
-    public void removeSignal(Signal signal){
+    public void removeSignal(ISignal signal){
         signalBin.add(signal);
     }
 
@@ -35,8 +34,7 @@ public class SignalManager {
         Collections.shuffle(signals);
         signals.forEach(signal ->{
             if(!world.isPosLoaded(signal.getBlockPos())) return;
-            signal.increment();
-            if(signal.getCounter() == 0){
+            if(signal.tickShouldStep()){
                 BlockState state = world.getBlockState(signal.getBlockPos());
 
                 // Signal disrupted by interactor
@@ -49,15 +47,15 @@ public class SignalManager {
 
                 // Signal ends
                 if (signal.getPower() == 1) {
-                    world.spawnParticles(ParticleTypes.SCULK_CHARGE_POP, pos.x, pos.y, pos.z, 40, 0, 0, 0, 0.1);
-                    world.playSound((PlayerEntity) null, pos.x, pos.y, pos.z, SoundEvents.BLOCK_SCULK_SENSOR_BREAK, SoundCategory.BLOCKS, 2, 1);
+                    signal.deathEffects(world);
                     removeSignal(signal);
                     return;
                 }
 
-                // Signal continues to next block
-                world.spawnParticles(ParticleTypes.SCULK_CHARGE_POP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+                // Signal continues to next block;
+                signal.stepEffects(world);
                 signal.step();
+                signal.decrement();
             }
         });
         updateSignals();

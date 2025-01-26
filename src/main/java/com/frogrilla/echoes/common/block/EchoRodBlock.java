@@ -1,8 +1,9 @@
 package com.frogrilla.echoes.common.block;
 
+import com.frogrilla.echoes.signals.ISignal;
 import com.frogrilla.echoes.signals.Signal;
 import com.frogrilla.echoes.signals.SignalManager;
-import com.frogrilla.echoes.signals.persistentManagerState;
+import com.frogrilla.echoes.signals.PersistentManagerState;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -71,23 +72,27 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
         if(state.get(POWERED) != powered){
             if(powered){
                 doEffects((ServerWorld) world, pos, state.get(FACING));
-                SignalManager manager = persistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
-                manager.addSignal(new Signal(pos.offset(state.get(FACING)), power, state.get(FACING)));
+                SignalManager manager = PersistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
+                Signal signal = new Signal();
+                signal.setBlockPos(pos.offset(state.get(FACING)));
+                signal.setFrequency(power);
+                signal.setDirection(state.get(FACING));
+                manager.addSignal(signal);
             }
             world.setBlockState(pos, state.with(POWERED, powered));
         }
     }
 
     @Override
-    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(ISignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
         if(state.get(POWERED)){
             manager.removeSignal(incoming);
         }
         else{
             Direction facing = state.get(FACING);
             doEffects(serverWorld, incoming.getBlockPos(), facing);
-            incoming.setBlockPos(incoming.getBlockPos().offset(facing));
             incoming.setDirection(facing);
+            incoming.step();
             incoming.setPower(SignalManager.defaultPower);
         }
     }

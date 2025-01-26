@@ -3,7 +3,7 @@ package com.frogrilla.echoes.common.init;
 import com.frogrilla.echoes.Echoes;
 import com.frogrilla.echoes.signals.Signal;
 import com.frogrilla.echoes.signals.SignalManager;
-import com.frogrilla.echoes.signals.persistentManagerState;
+import com.frogrilla.echoes.signals.PersistentManagerState;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -96,15 +96,17 @@ public class EchoesCommands {
     }
 
     private static void executeNewSignal(BlockPos blockPos, int frequency, Direction direction, CommandContext<ServerCommandSource> context) {
-        SignalManager manager = persistentManagerState.getServerWorldState(context.getSource().getWorld()).signalManager;
-        manager.addSignal(new Signal(
-                blockPos, frequency, direction
-        ));
+        SignalManager manager = PersistentManagerState.getServerWorldState(context.getSource().getWorld()).signalManager;
+        Signal signal = new Signal();
+        signal.setBlockPos(blockPos);
+        signal.setFrequency(frequency);
+        signal.setDirection(direction);
+        manager.addSignal(signal);
         context.getSource().sendFeedback(() -> Text.literal("Created signal in %s:\nAt %s\nFrequency: %s\nDirection: %s".formatted(context.getSource().getWorld().getRegistryKey().getValue(), blockPos.toShortString(), frequency, direction)), true);
     }
 
     private static void executeClearSignals(CommandContext<ServerCommandSource> context){
-        SignalManager manager = persistentManagerState.getServerWorldState(context.getSource().getWorld()).signalManager;
+        SignalManager manager = PersistentManagerState.getServerWorldState(context.getSource().getWorld()).signalManager;
         manager.signals.clear();
         manager.signalBuffer.clear();
         manager.signalBin.clear();
@@ -112,7 +114,7 @@ public class EchoesCommands {
     }
 
     private static void executeCountSignals(CommandContext<ServerCommandSource> context){
-        SignalManager manager = persistentManagerState.getServerWorldState(context.getSource().getWorld()).signalManager;
+        SignalManager manager = PersistentManagerState.getServerWorldState(context.getSource().getWorld()).signalManager;
         context.getSource().sendFeedback(() -> Text.literal("Signal count for %s:\nActive: %s\nBuffer: %s\nBin: %s".formatted(context.getSource().getWorld().getRegistryKey().getValue(), manager.signals.size(), manager.signalBuffer.size(), manager.signalBin.size())), true);
     }
 
