@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.8-SNAPSHOT'
+	id 'fabric-loom' version '1.9-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -71,6 +71,7 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.base.archivesName.get()}"}
 	}
+
 }
 
 // configure the maven publication
@@ -90,3 +91,5 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+jar.finalizedBy('remapJar')
