@@ -1,6 +1,7 @@
-package com.frogrilla.echoes.signals;
+package com.frogrilla.echoes.signal;
 
 import com.frogrilla.echoes.Echoes;
+import com.frogrilla.echoes.common.signal.AbstractSignal;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.RegistryWrapper;
@@ -28,11 +29,11 @@ public class PersistentManagerState extends PersistentState {
         PersistentManagerState state = new PersistentManagerState();
         NbtList signalNbtList = tag.getList("signals", 10);
         signalNbtList.forEach(element -> {
+            Class<? extends AbstractSignal> signalClass = AbstractSignal.SIGNAL_TYPES.get(tag.getInt("type"));
             try {
-                state.signalManager.addSignal(ISignal.fromCompound((NbtCompound) element));
-            } catch (InstantiationException e) {
-                throw new RuntimeException(e);
-            } catch (IllegalAccessException e) {
+                AbstractSignal signal = signalClass.getConstructor(NbtCompound.class).newInstance(tag);
+                state.signalManager.addSignal(signal);
+            } catch (Exception e) {
                 throw new RuntimeException(e);
             }
         });

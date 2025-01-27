@@ -1,8 +1,7 @@
 package com.frogrilla.echoes.common.block;
 
-import com.frogrilla.echoes.signals.ISignal;
-import com.frogrilla.echoes.signals.Signal;
-import com.frogrilla.echoes.signals.SignalManager;
+import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -206,15 +205,15 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(ISignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
-        if(incoming.getDirection().getAxis() == state.get(FACING).getAxis()) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+        if(incoming.direction.getAxis() == state.get(FACING).getAxis()) {
             manager.removeSignal(incoming);
             return;
         }
 
-        BooleanProperty side = getPropertyFromDirection(state.get(FACING), incoming.getDirection().getOpposite());
+        BooleanProperty side = getPropertyFromDirection(state.get(FACING), incoming.direction.getOpposite());
         if(state.get(side)){
-            incoming.setDirection(getReflectionDirection(state.get(FACING), incoming.getDirection()));
+            incoming.direction = getReflectionDirection(state.get(FACING), incoming.direction);
         }
 
         ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);

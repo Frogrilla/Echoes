@@ -15,7 +15,6 @@ public class Echoes implements ModInitializer {
 		EchoesBlocks.registerBlocks();
 		EchoesItems.registerItems();
 		EchoesParticles.registerParticles();
-		EchoesCommands.registerCommands();
 		EchoesItemGroups.registerItemGroups();
 	}
 }

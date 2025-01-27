@@ -1,6 +1,6 @@
 package com.frogrilla.echoes.mixin;
 
-import com.frogrilla.echoes.signals.PersistentManagerState;
+import com.frogrilla.echoes.signal.PersistentManagerState;
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

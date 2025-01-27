@@ -1,14 +1,10 @@
-package com.frogrilla.echoes.signals;
+package com.frogrilla.echoes.signal;
 
 import com.frogrilla.echoes.Echoes;
 import com.frogrilla.echoes.common.block.ISignalInteractor;
+import com.frogrilla.echoes.common.signal.AbstractSignal;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,24 +14,25 @@ public class SignalManager {
 
     public final static int defaultPower = 15;
 
-    public List<ISignal> signals = new ArrayList<>();
-    public List<ISignal> signalBuffer = new ArrayList<>();
-    public List<ISignal> signalBin = new ArrayList<>();
+    public List<AbstractSignal> signals = new ArrayList<>();
+    public List<AbstractSignal> signalBuffer = new ArrayList<>();
+    public List<AbstractSignal> signalBin = new ArrayList<>();
 
-    public void addSignal(ISignal signal){
+    public void addSignal(AbstractSignal signal){
         signalBuffer.add(signal);
     }
 
-    public void removeSignal(ISignal signal){
+    public void removeSignal(AbstractSignal signal){
         signalBin.add(signal);
     }
 
     public void tickSignals(ServerWorld world){
         Collections.shuffle(signals);
         signals.forEach(signal ->{
-            if(!world.isPosLoaded(signal.getBlockPos())) return;
-            if(signal.tickShouldStep()){
-                BlockState state = world.getBlockState(signal.getBlockPos());
+            if(!world.isPosLoaded(signal.blockPos)) return;
+            signal.preTick();
+            if(signal.shouldTick()){
+                BlockState state = world.getBlockState(signal.blockPos);
 
                 // Signal disrupted by interactor
                 if(state.getBlock() instanceof ISignalInteractor interactor){
@@ -43,19 +40,7 @@ public class SignalManager {
                     return;
                 }
 
-                Vec3d pos = signal.getBlockPos().toCenterPos();
-
-                // Signal ends
-                if (signal.getPower() == 1) {
-                    signal.deathEffects(world);
-                    removeSignal(signal);
-                    return;
-                }
-
-                // Signal continues to next block;
-                signal.stepEffects(world);
-                signal.step();
-                signal.decrement();
+                signal.defaultTick(this, world);
             }
         });
         updateSignals();
