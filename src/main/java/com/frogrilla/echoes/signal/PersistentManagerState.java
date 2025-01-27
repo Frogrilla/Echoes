@@ -9,6 +9,8 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.PersistentState;
 import net.minecraft.world.PersistentStateManager;
 
+import java.lang.reflect.Constructor;
+
 public class PersistentManagerState extends PersistentState {
 
     public SignalManager signalManager = new SignalManager();
@@ -29,9 +31,11 @@ public class PersistentManagerState extends PersistentState {
         PersistentManagerState state = new PersistentManagerState();
         NbtList signalNbtList = tag.getList("signals", 10);
         signalNbtList.forEach(element -> {
-            Class<? extends AbstractSignal> signalClass = AbstractSignal.SIGNAL_TYPES.get(tag.getInt("type"));
+            NbtCompound compound = (NbtCompound)element;
+            Class<? extends AbstractSignal> signalClass = AbstractSignal.SIGNAL_TYPES.get(compound.getInt("type"));
             try {
-                AbstractSignal signal = signalClass.getConstructor(NbtCompound.class).newInstance(tag);
+                Constructor<? extends AbstractSignal> constructor = signalClass.getConstructor(NbtCompound.class);
+                AbstractSignal signal = constructor.newInstance(compound);
                 state.signalManager.addSignal(signal);
             } catch (Exception e) {
                 throw new RuntimeException(e);

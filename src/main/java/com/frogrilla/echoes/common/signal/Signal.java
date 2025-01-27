@@ -1,5 +1,6 @@
 package com.frogrilla.echoes.common.signal;
 
+import com.frogrilla.echoes.Echoes;
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
@@ -28,6 +29,11 @@ public class Signal extends AbstractSignal{
     @Override
     public void step() {
         blockPos = blockPos.offset(direction);
+    }
+
+    @Override
+    public void resetProperties() {
+        power = DEFAULT_POWER;
     }
 
     @Override

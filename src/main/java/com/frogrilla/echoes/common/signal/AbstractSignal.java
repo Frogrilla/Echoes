@@ -41,6 +41,10 @@ public abstract class AbstractSignal {
         return compound;
     }
 
+    public String toString() {
+        return String.format("%s, %s, %s", blockPos.toShortString(), frequency, direction);
+    }
+
     /**
      * Called before the signal manager checks if the signal will be ticked
      */
