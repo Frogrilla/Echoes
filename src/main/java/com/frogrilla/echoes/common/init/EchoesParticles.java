@@ -9,10 +9,12 @@ import net.minecraft.util.Identifier;
 
 public class EchoesParticles {
 
-    public static final SimpleParticleType SIGNAL_STEP =  FabricParticleTypes.simple();
+    public static final SimpleParticleType ECHO_CHARGE =  FabricParticleTypes.simple();
+    public static final SimpleParticleType CORRUPTED_ECHO_CHARGE = FabricParticleTypes.simple();
 
     public static void registerParticles(){
         Echoes.LOGGER.info("Registering particles for " + Echoes.MOD_ID);
-        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Echoes.MOD_ID, "signal_step"), SIGNAL_STEP);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Echoes.MOD_ID, "echo_charge"), ECHO_CHARGE);
+        Registry.register(Registries.PARTICLE_TYPE, Identifier.of(Echoes.MOD_ID, "corrupted_echo_charge"), CORRUPTED_ECHO_CHARGE);
     }
 }

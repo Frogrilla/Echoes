@@ -87,7 +87,7 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
         else{
             Direction facing = state.get(FACING);
             doEffects(serverWorld, incoming.blockPos, facing);
-            incoming.resetProperties();
+            incoming.refreshProperties();
             incoming.direction = facing;
             incoming.step();
         }

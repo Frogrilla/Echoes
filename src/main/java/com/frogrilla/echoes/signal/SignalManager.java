@@ -40,7 +40,8 @@ public class SignalManager {
                     return;
                 }
 
-                signal.defaultTick(this, world);
+                signal.effects(world, signal.blockPos.toCenterPos());
+                signal.regularTick(this);
             }
         });
         updateSignals();

@@ -63,7 +63,7 @@ public abstract class AbstractSignal {
      * Does nothing by default, but other signal types may use it to reset their properties.
      * Use as an alternative to creating a new instance.
      */
-    public void resetProperties() {};
+    public void refreshProperties() {};
 
     /**
      * Method for how the signal should move by default.
@@ -75,22 +75,12 @@ public abstract class AbstractSignal {
      * Called by the signal manager if shouldTick returns true
      * and if the signal isn't handled by a signal interactor.
      */
-    public abstract void defaultTick(SignalManager manager, ServerWorld world);
-
-    /**
-     * Do effects such as particles and sounds at the signal's block pos.
-     * @param world
-     */
-    public void signalEffect(ServerWorld world){
-        signalEffects(world, blockPos.toCenterPos());
-    }
+    public abstract void regularTick(SignalManager manager);
 
     /**
      * Do effects such as particles and sounds at the given position.
      * @param world
      * @param pos
      */
-    public void signalEffects(ServerWorld world, Vec3d pos){
-        world.spawnParticles(ParticleTypes.SCULK_CHARGE_POP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
-    }
+    public abstract void effects(ServerWorld world, Vec3d pos);
 }

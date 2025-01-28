@@ -27,7 +27,7 @@ public class SignalTestBlock extends Block implements ISignalInteractor {
         serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_GRATE_PLACE, SoundCategory.BLOCKS, 1, 1);
 
         Direction dir = incoming.direction.rotateClockwise(Direction.Axis.X);
-        incoming.resetProperties();
+        incoming.refreshProperties();
         incoming.step();
     }
 

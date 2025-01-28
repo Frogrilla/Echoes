@@ -216,6 +216,7 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
             incoming.direction = getReflectionDirection(state.get(FACING), incoming.direction);
         }
 
-        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
+        incoming.effects(serverWorld, incoming.blockPos.toCenterPos());
+        incoming.regularTick(manager);
     }
 }
