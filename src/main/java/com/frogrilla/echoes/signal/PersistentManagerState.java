@@ -2,6 +2,7 @@ package com.frogrilla.echoes.signal;
 
 import com.frogrilla.echoes.Echoes;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.common.signal.Signal;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.registry.RegistryWrapper;
@@ -32,13 +33,19 @@ public class PersistentManagerState extends PersistentState {
         NbtList signalNbtList = tag.getList("signals", 10);
         signalNbtList.forEach(element -> {
             NbtCompound compound = (NbtCompound)element;
-            Class<? extends AbstractSignal> signalClass = AbstractSignal.SIGNAL_TYPES.get(compound.getInt("type"));
-            try {
-                Constructor<? extends AbstractSignal> constructor = signalClass.getConstructor(NbtCompound.class);
-                AbstractSignal signal = constructor.newInstance(compound);
-                state.signalManager.addSignal(signal);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            String type = compound.getString("type");
+            if(AbstractSignal.SIGNAL_TYPES.containsKey(type)){
+                Class<? extends AbstractSignal> signalClass = AbstractSignal.SIGNAL_TYPES.get(type);
+                try {
+                    Constructor<? extends AbstractSignal> constructor = signalClass.getConstructor(NbtCompound.class);
+                    AbstractSignal signal = constructor.newInstance(compound);
+                    state.signalManager.addSignal(signal);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            else{
+                Echoes.LOGGER.warn("Signal type %s doesn't exist".formatted(type));
             }
         });
         return state;

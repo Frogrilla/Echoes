@@ -3,19 +3,20 @@ package com.frogrilla.echoes.common.signal;
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class AbstractSignal {
-    public static final List<Class<? extends AbstractSignal>> SIGNAL_TYPES = new ArrayList<>(){
-        { add(Signal.class); }
-        { add(CorruptedSignal.class); }
-    };
+    public static HashMap<String, Class<? extends AbstractSignal>> SIGNAL_TYPES = new HashMap<>();
 
     public BlockPos blockPos;
     public Direction direction;
@@ -34,7 +35,7 @@ public abstract class AbstractSignal {
 
     public NbtCompound asCompound(){
         NbtCompound compound = new NbtCompound();
-        compound.putInt("type", SIGNAL_TYPES.indexOf(this.getClass()));
+        compound.putString("type", this.getClass().getName());
         compound.putLong("pos", blockPos.asLong());
         compound.putInt("direction", direction.getId());
         compound.putInt("frequency", frequency);
@@ -83,4 +84,5 @@ public abstract class AbstractSignal {
      * @param pos
      */
     public abstract void effects(ServerWorld world, Vec3d pos);
+
 }
