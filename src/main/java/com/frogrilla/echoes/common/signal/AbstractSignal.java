@@ -35,7 +35,6 @@ public abstract class AbstractSignal {
 
     public NbtCompound asCompound(){
         NbtCompound compound = new NbtCompound();
-        compound.putString("type", this.getClass().getName());
         compound.putLong("pos", blockPos.asLong());
         compound.putInt("direction", direction.getId());
         compound.putInt("frequency", frequency);
