@@ -30,7 +30,7 @@ public class CorruptedSignal extends AbstractSignal{
     @Override
     public NbtCompound asCompound() {
         NbtCompound compound = super.asCompound();
-        compound.putInt("power", power);
+        compound.putByte("power", power);
         compound.putBoolean("step_buffered", stepBuffered);
         return compound;
     }
