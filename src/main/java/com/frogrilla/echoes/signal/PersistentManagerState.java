@@ -22,12 +22,19 @@ public class PersistentManagerState extends PersistentState {
         NbtList signalTypes = new NbtList();
         NbtList signalNbtList = new NbtList();
 
-        AbstractSignal.SIGNAL_TYPES.keySet().forEach(id -> signalTypes.add(NbtString.of(id)));
-
         signalManager.updateSignals();
         signalManager.signals.forEach(signal -> {
             NbtCompound element = signal.asCompound();
-            element.putByte("type", (byte) signalTypes.indexOf(NbtString.of(signal.getClass().getName())));
+
+            // Add type index. If the type isn't yet in the list add it.
+            NbtString classString = NbtString.of(signal.getClass().getName());
+            byte typeIndex = (byte) signalTypes.indexOf(classString);
+            if(typeIndex == -1){
+                typeIndex = (byte)signalTypes.size();
+                signalTypes.add(classString);
+            }
+            element.putByte("type", typeIndex);
+
             signalNbtList.add(element);
         });
 
