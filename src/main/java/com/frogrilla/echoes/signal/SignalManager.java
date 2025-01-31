@@ -38,7 +38,7 @@ public class SignalManager {
                 }
 
                 signal.effects(world, signal.blockPos.toCenterPos());
-                signal.tick(this);
+                signal.tick();
             }
         });
         updateSignals();

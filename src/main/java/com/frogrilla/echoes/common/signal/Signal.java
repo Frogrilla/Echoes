@@ -43,7 +43,7 @@ public class Signal extends AbstractSignal{
     }
 
     @Override
-    public void tick(SignalManager manager) {
+    public void tick() {
         if(power <= 1){
             removalFlag = true;
         }

@@ -7,6 +7,6 @@ import net.minecraft.server.world.ServerWorld;
 
 public interface ISignalInteractor {
     default void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
-        incoming.tick(manager);
+        incoming.tick();
     }
 }

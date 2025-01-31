@@ -217,6 +217,6 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
         }
 
         incoming.effects(serverWorld, incoming.blockPos.toCenterPos());
-        incoming.tick(manager);
+        incoming.tick();
     }
 }

@@ -70,7 +70,7 @@ public abstract class AbstractSignal {
      * Called by the signal manager if shouldTick returns true
      * and if the signal isn't handled by a signal interactor.
      */
-    public abstract void tick(SignalManager manager);
+    public abstract void tick();
 
     /**
      * Do effects such as particles and sounds at the given position.

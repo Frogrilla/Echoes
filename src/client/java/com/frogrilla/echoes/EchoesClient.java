@@ -17,5 +17,6 @@ public class EchoesClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(EchoesBlocks.REFLECTOR, RenderLayer.getTranslucent());
 		BlockRenderLayerMap.INSTANCE.putBlock(EchoesBlocks.ECHO_ROD, RenderLayer.getCutout());
 		BlockRenderLayerMap.INSTANCE.putBlock(EchoesBlocks.CORRUPTED_ECHO_ROD, RenderLayer.getCutout());
+		BlockRenderLayerMap.INSTANCE.putBlock(EchoesBlocks.ECHO_LOTUS, RenderLayer.getCutout());
 	}
 }
