@@ -57,9 +57,9 @@ public class CorruptedSignal extends AbstractSignal{
     }
 
     @Override
-    public void regularTick(SignalManager manager) {
+    public void tick(SignalManager manager) {
         if(power <= 1){
-            manager.removeSignal(this);
+            removalFlag = true;
         }
         else{
             step();

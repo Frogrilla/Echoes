@@ -82,7 +82,7 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
     @Override
     public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
         if(state.get(POWERED)){
-            manager.removeSignal(incoming);
+            incoming.removalFlag = true;
         }
         else{
             Direction facing = state.get(FACING);

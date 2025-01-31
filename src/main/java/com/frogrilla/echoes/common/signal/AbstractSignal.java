@@ -2,18 +2,12 @@ package com.frogrilla.echoes.common.signal;
 
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.List;
 
 public abstract class AbstractSignal {
     public static HashMap<String, Class<? extends AbstractSignal>> SIGNAL_TYPES = new HashMap<>();
@@ -21,6 +15,7 @@ public abstract class AbstractSignal {
     public BlockPos blockPos;
     public Direction direction;
     public byte frequency;
+    public boolean removalFlag = false;
     public AbstractSignal(BlockPos blockPos, Direction direction, byte frequency) {
         this.blockPos = blockPos;
         this.direction = direction;
@@ -75,7 +70,7 @@ public abstract class AbstractSignal {
      * Called by the signal manager if shouldTick returns true
      * and if the signal isn't handled by a signal interactor.
      */
-    public abstract void regularTick(SignalManager manager);
+    public abstract void tick(SignalManager manager);
 
     /**
      * Do effects such as particles and sounds at the given position.

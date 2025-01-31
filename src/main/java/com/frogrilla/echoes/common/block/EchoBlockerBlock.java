@@ -84,7 +84,7 @@ public class EchoBlockerBlock extends Block implements ISignalInteractor {
         }
         else{
             serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_POLISHED_TUFF_HIT, SoundCategory.BLOCKS, 1, 1);
-            manager.removeSignal(incoming);
+            incoming.removalFlag = true;
         }
     }
 
