@@ -20,8 +20,8 @@ public abstract class AbstractSignal {
 
     public BlockPos blockPos;
     public Direction direction;
-    public int frequency;
-    public AbstractSignal(BlockPos blockPos, Direction direction, int frequency) {
+    public byte frequency;
+    public AbstractSignal(BlockPos blockPos, Direction direction, byte frequency) {
         this.blockPos = blockPos;
         this.direction = direction;
         this.frequency = frequency;
@@ -29,15 +29,15 @@ public abstract class AbstractSignal {
 
     public AbstractSignal(NbtCompound compound){
         this.blockPos = BlockPos.fromLong(compound.getLong("pos"));
-        this.direction = Direction.byId(compound.getInt("direction"));
-        this.frequency = compound.getInt("frequency");
+        this.direction = Direction.byId(compound.getByte("direction"));
+        this.frequency = compound.getByte("frequency");
     }
 
     public NbtCompound asCompound(){
         NbtCompound compound = new NbtCompound();
         compound.putLong("pos", blockPos.asLong());
-        compound.putInt("direction", direction.getId());
-        compound.putInt("frequency", frequency);
+        compound.putByte("direction", (byte) direction.getId());
+        compound.putByte("frequency", frequency);
         return compound;
     }
 

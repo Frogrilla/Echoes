@@ -53,7 +53,7 @@ public class EchoLatchBlock extends Block implements ISignalInteractor {
     @Override
     public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
         if(!state.get(POWERED)){
-            serverWorld.setBlockState(incoming.blockPos, state.with(FREQUENCY, incoming.frequency));
+            serverWorld.setBlockState(incoming.blockPos, state.with(FREQUENCY, (int)incoming.frequency));
         }
         ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
     }

@@ -72,7 +72,7 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
             if(powered){
                 doEffects((ServerWorld) world, pos, state.get(FACING));
                 SignalManager manager = PersistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
-                Signal signal = new Signal(pos.offset(state.get(FACING)), state.get(FACING), power);
+                Signal signal = new Signal(pos.offset(state.get(FACING)), state.get(FACING), (byte) power);
                 manager.addSignal(signal);
             }
             world.setBlockState(pos, state.with(POWERED, powered));

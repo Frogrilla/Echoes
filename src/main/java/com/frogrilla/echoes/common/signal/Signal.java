@@ -15,20 +15,20 @@ import net.minecraft.util.math.Vec3d;
 
 public class Signal extends AbstractSignal{
     public static final int DEFAULT_POWER = 16;
-    private int power = 16;
+    private byte power = 16;
 
-    public Signal(BlockPos blockPos, Direction direction, int frequency) {
+    public Signal(BlockPos blockPos, Direction direction, byte frequency) {
         super(blockPos, direction, frequency);
     }
     public Signal(NbtCompound compound){
         super(compound);
-        power = compound.getInt("power");
+        power = compound.getByte("power");
     }
 
     @Override
     public NbtCompound asCompound() {
         NbtCompound compound = super.asCompound();
-        compound.putInt("power", power);
+        compound.putByte("power", power);
         return compound;
     }
 

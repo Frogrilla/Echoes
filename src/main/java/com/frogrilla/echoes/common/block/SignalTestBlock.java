@@ -26,8 +26,8 @@ public class SignalTestBlock extends Block implements ISignalInteractor {
         //Vec3d pos = incoming.getBlockPos().toCenterPos();
         serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_GRATE_PLACE, SoundCategory.BLOCKS, 1, 1);
 
-        Direction dir = incoming.direction.rotateClockwise(Direction.Axis.X);
         incoming.refreshProperties();
+        incoming.direction = incoming.direction.rotateClockwise(Direction.Axis.X);
         incoming.step();
     }
 
@@ -35,7 +35,7 @@ public class SignalTestBlock extends Block implements ISignalInteractor {
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         if(world.isClient()) return;
         SignalManager manager = PersistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
-        Signal signal = new Signal(pos.up(), Direction.UP, 15);
+        Signal signal = new Signal(pos.up(), Direction.UP, (byte) 15);
         manager.addSignal(signal);
     }
 }

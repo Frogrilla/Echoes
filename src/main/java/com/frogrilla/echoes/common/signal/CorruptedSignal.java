@@ -14,42 +14,41 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
 public class CorruptedSignal extends AbstractSignal{
-    public static final int DEFAULT_POWER = 8;
-    private int power = DEFAULT_POWER;
-    private int counter = 0;
+    public static final byte DEFAULT_POWER = 8;
+    private byte power = DEFAULT_POWER;
+    private boolean stepBuffered = true;
 
-    public CorruptedSignal(BlockPos blockPos, Direction direction, int frequency) {
+    public CorruptedSignal(BlockPos blockPos, Direction direction, byte frequency) {
         super(blockPos, direction, frequency);
     }
     public CorruptedSignal(NbtCompound compound){
         super(compound);
-        power = compound.getInt("power");
-        counter = compound.getInt("counter");
+        power = compound.getByte("power");
+        stepBuffered = compound.getBoolean("step_buffered");
     }
 
     @Override
     public NbtCompound asCompound() {
         NbtCompound compound = super.asCompound();
         compound.putInt("power", power);
-        compound.putInt("counter", counter);
+        compound.putBoolean("step_buffered", stepBuffered);
         return compound;
     }
 
     @Override
     public void preTick() {
-        counter++;
-        counter %= 2;
+        stepBuffered ^= true;
     }
 
     @Override
     public boolean shouldTick() {
-        return counter == 0;
+        return stepBuffered;
     }
 
     @Override
     public void refreshProperties() {
         power = DEFAULT_POWER;
-        counter = 0;
+        stepBuffered = true;
     }
 
     @Override
