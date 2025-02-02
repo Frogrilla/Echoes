@@ -1,6 +1,8 @@
 package com.frogrilla.echoes.common.block;
 
+import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.frogrilla.echoes.common.signal.CorruptedSignal;
+import com.frogrilla.echoes.common.signal.Signal;
 import com.frogrilla.echoes.signal.PersistentManagerState;
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
@@ -38,6 +40,15 @@ public class CorruptedEchoRodBlock extends EchoRodBlock{
                 manager.addSignal(signal);
             }
             world.setBlockState(pos, state.with(POWERED, powered));
+        }
+    }
+
+    @Override
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
+        incoming.removalFlag = true;
+
+        if(!state.get(POWERED)){
+            manager.addSignal(new CorruptedSignal(incoming.blockPos.offset(state.get(FACING), 2), state.get(FACING), incoming.frequency));
         }
     }
 }

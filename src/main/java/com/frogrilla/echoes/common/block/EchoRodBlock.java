@@ -1,6 +1,7 @@
 package com.frogrilla.echoes.common.block;
 
 import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.common.signal.PulseSignal;
 import com.frogrilla.echoes.common.signal.Signal;
 import com.frogrilla.echoes.signal.*;
 import com.mojang.serialization.MapCodec;
@@ -81,15 +82,10 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
 
     @Override
     public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
-        if(state.get(POWERED)){
-            incoming.removalFlag = true;
-        }
-        else{
-            Direction facing = state.get(FACING);
-            doEffects(serverWorld, incoming.blockPos, facing);
-            incoming.refreshProperties();
-            incoming.direction = facing;
-            incoming.step();
+        incoming.removalFlag = true;
+
+        if(!state.get(POWERED)){
+            manager.addSignal(new Signal(incoming.blockPos.offset(state.get(FACING)), state.get(FACING), incoming.frequency));
         }
     }
 }
