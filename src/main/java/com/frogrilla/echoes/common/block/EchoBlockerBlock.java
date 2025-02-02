@@ -77,10 +77,10 @@ public class EchoBlockerBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state , boolean controlsEffects) {
         if(state.get(getPropertyFromDirection(incoming.direction.getOpposite()))){
             serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.ENTITY_MAGMA_CUBE_HURT_SMALL, SoundCategory.BLOCKS, 1, 1);
-            ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
+            ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state, controlsEffects);
         }
         else{
             serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_POLISHED_TUFF_HIT, SoundCategory.BLOCKS, 1, 1);
@@ -107,4 +107,5 @@ public class EchoBlockerBlock extends Block implements ISignalInteractor {
         }
         return ActionResult.PASS;
     }
+
 }

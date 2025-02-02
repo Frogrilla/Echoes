@@ -33,7 +33,7 @@ public class SignalManager {
 
                 // Signal disrupted by interactor
                 if(state.getBlock() instanceof ISignalInteractor interactor){
-                    interactor.processSignal(signal, this, world, state);
+                    signal.processedBy(interactor, this, world, state);
                     return;
                 }
 

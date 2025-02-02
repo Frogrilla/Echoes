@@ -16,6 +16,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class EchoLotusBlock extends Block implements ISignalInteractor{
@@ -60,9 +61,8 @@ public class EchoLotusBlock extends Block implements ISignalInteractor{
     }
 
     @Override
-    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
-        incoming.effects(serverWorld, incoming.blockPos.toCenterPos());
-
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
+        if(controlsEffects) incoming.effects(serverWorld, incoming.blockPos.toCenterPos());
         if(incoming.direction != state.get(FACING).getOpposite()){
             incoming.tick();
         }

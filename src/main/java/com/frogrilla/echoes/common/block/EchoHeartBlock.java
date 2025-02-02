@@ -64,13 +64,14 @@ public class EchoHeartBlock extends PillarBlock implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         if(!state.get(TRIGGERED)){
             serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_FROGSPAWN_BREAK, SoundCategory.BLOCKS);
             serverWorld.setBlockState(incoming.blockPos, state.with(TRIGGERED, true).with(POWER, (int)incoming.frequency));
             serverWorld.scheduleBlockTick(incoming.blockPos, this, 2);
         }
 
-        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
+        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state, controlsEffects);
     }
+
 }

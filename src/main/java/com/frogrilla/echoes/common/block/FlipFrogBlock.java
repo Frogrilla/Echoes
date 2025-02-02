@@ -30,7 +30,7 @@ public class FlipFrogBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         if(state.get(TRIGGERED)){
             serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_BULB_TURN_OFF, SoundCategory.BLOCKS, 2, 1);
         }
@@ -39,7 +39,7 @@ public class FlipFrogBlock extends Block implements ISignalInteractor {
         }
 
         serverWorld.setBlockState(incoming.blockPos, serverWorld.getBlockState(incoming.blockPos).cycle(TRIGGERED));
-        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
+        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state, controlsEffects);
     }
 
     @Override

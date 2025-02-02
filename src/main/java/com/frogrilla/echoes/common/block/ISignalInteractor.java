@@ -6,7 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
 
 public interface ISignalInteractor {
-    default void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    default void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         incoming.tick();
     }
 }

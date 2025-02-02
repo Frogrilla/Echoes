@@ -80,7 +80,7 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
     }
 
     @Override
-    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         if(state.get(POWERED)){
             incoming.removalFlag = true;
         }

@@ -1,6 +1,8 @@
 package com.frogrilla.echoes.common.signal;
 
+import com.frogrilla.echoes.common.block.ISignalInteractor;
 import com.frogrilla.echoes.signal.SignalManager;
+import net.minecraft.block.BlockState;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
@@ -71,6 +73,10 @@ public abstract class AbstractSignal {
      * and if the signal isn't handled by a signal interactor.
      */
     public abstract void tick();
+
+    public void processedBy(ISignalInteractor interactor, SignalManager manager, ServerWorld world, BlockState state){
+        interactor.processSignal(this, manager, world, state, true);
+    }
 
     /**
      * Do effects such as particles and sounds at the given position.

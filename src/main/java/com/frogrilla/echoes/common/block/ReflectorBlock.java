@@ -205,7 +205,9 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
+        if(controlsEffects) incoming.effects(serverWorld, incoming.blockPos.toCenterPos());
+
         if(incoming.direction.getAxis() == state.get(FACING).getAxis()) {
             incoming.removalFlag = true;
             return;
@@ -216,7 +218,6 @@ public class ReflectorBlock extends Block implements ISignalInteractor {
             incoming.direction = getReflectionDirection(state.get(FACING), incoming.direction);
         }
 
-        incoming.effects(serverWorld, incoming.blockPos.toCenterPos());
         incoming.tick();
     }
 }

@@ -22,7 +22,7 @@ public class SignalTestBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         //Vec3d pos = incoming.getBlockPos().toCenterPos();
         serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_GRATE_PLACE, SoundCategory.BLOCKS, 1, 1);
 
