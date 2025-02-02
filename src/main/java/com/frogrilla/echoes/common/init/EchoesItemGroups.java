@@ -27,6 +27,7 @@ public class EchoesItemGroups {
                     add(EchoesBlocks.ECHO_LOTUS.asItem().getDefaultStack());
                     add(EchoesBlocks.ECHO_BOOSTER.asItem().getDefaultStack());
                     add(EchoesBlocks.CORRUPTED_ECHO_ROD.asItem().getDefaultStack());
+                    add(EchoesBlocks.ECHO_MODULATOR.asItem().getDefaultStack());
                 }
             });
         })
