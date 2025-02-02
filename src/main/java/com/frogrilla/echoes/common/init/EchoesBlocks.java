@@ -23,6 +23,7 @@ public class EchoesBlocks {
     public static final Block REFLECTOR = registerBlockWithItem("reflector", new ReflectorBlock(AbstractBlock.Settings.copy(Blocks.GLASS).solidBlock(Blocks::never).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "reflector")))));
     public static final Block ECHO_BLOCKER = registerBlockWithItem("echo_blocker", new EchoBlockerBlock(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_blocekr")))));
     public static final Block ECHO_LOTUS = registerBlockWithItem("echo_lotus", new EchoLotusBlock(AbstractBlock.Settings.copy(Blocks.SPORE_BLOSSOM).solidBlock(Blocks::never).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_lotus")))));
+    public static final Block ECHO_BOOSTER = registerBlockWithItem("echo_booster", new EchoBoosterBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_DEEPSLATE).solidBlock(Blocks::never).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_booster")))));
 
     // Extra hidden blocks
     public static final Block CORRUPTED_ECHO_ROD = registerBlockWithItem("corrupted_echo_rod" ,new CorruptedEchoRodBlock(AbstractBlock.Settings.copy(Blocks.LIGHTNING_ROD).solidBlock(Blocks::never).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "corrupted_echo_rod")))));
