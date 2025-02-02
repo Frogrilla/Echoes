@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "echoes:block/echo_lotus",
+      "x": 180
+    },
+    "facing=down": {
+      "model": "echoes:block/echo_lotus"
+    },
+    "facing=west": {
+      "model": "echoes:block/echo_lotus",
+      "x": 90,
+      "y": 90
+    },
+    "facing=east": {
+      "model": "echoes:block/echo_lotus",
+      "x": 90,
+      "y": 270
+    },
+    "facing=south": {
+      "model": "echoes:block/echo_lotus",
+      "x": 90
+    },
+    "facing=north": {
+      "model": "echoes:block/echo_lotus",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

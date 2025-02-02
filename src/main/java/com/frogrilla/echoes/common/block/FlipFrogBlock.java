@@ -1,7 +1,7 @@
 package com.frogrilla.echoes.common.block;
 
-import com.frogrilla.echoes.signals.Signal;
-import com.frogrilla.echoes.signals.SignalManager;
+import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,16 +30,16 @@ public class FlipFrogBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         if(state.get(TRIGGERED)){
-            serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.BLOCK_COPPER_BULB_TURN_OFF, SoundCategory.BLOCKS, 2, 1);
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_BULB_TURN_OFF, SoundCategory.BLOCKS, 2, 1);
         }
         else{
-            serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.BLOCK_COPPER_BULB_TURN_ON, SoundCategory.BLOCKS, 2, 1);
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_BULB_TURN_ON, SoundCategory.BLOCKS, 2, 1);
         }
 
-        serverWorld.setBlockState(incoming.getBlockPos(), serverWorld.getBlockState(incoming.getBlockPos()).cycle(TRIGGERED));
-        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
+        serverWorld.setBlockState(incoming.blockPos, serverWorld.getBlockState(incoming.blockPos).cycle(TRIGGERED));
+        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state, controlsEffects);
     }
 
     @Override

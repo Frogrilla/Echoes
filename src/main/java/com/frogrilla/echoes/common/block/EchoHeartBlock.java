@@ -1,7 +1,7 @@
 package com.frogrilla.echoes.common.block;
 
-import com.frogrilla.echoes.signals.Signal;
-import com.frogrilla.echoes.signals.SignalManager;
+import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.PillarBlock;
@@ -64,13 +64,14 @@ public class EchoHeartBlock extends PillarBlock implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         if(!state.get(TRIGGERED)){
-            serverWorld.playSound((PlayerEntity) null, incoming.getBlockPos(), SoundEvents.BLOCK_FROGSPAWN_BREAK, SoundCategory.BLOCKS);
-            serverWorld.setBlockState(incoming.getBlockPos(), state.with(TRIGGERED, true).with(POWER, incoming.getFrequency()));
-            serverWorld.scheduleBlockTick(incoming.getBlockPos(), this, 2);
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_FROGSPAWN_BREAK, SoundCategory.BLOCKS);
+            serverWorld.setBlockState(incoming.blockPos, state.with(TRIGGERED, true).with(POWER, (int)incoming.frequency));
+            serverWorld.scheduleBlockTick(incoming.blockPos, this, 2);
         }
 
-        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
+        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state, controlsEffects);
     }
+
 }

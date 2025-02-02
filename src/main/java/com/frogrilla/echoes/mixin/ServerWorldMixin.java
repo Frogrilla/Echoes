@@ -1,6 +1,6 @@
 package com.frogrilla.echoes.mixin;
 
-import com.frogrilla.echoes.signals.persistentManagerState;
+import com.frogrilla.echoes.signal.PersistentManagerState;
 import net.minecraft.server.world.ServerWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,7 +17,7 @@ public class ServerWorldMixin {
     @Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 1), method = "tick")
     public void tick(BooleanSupplier shouldKeepTicking, CallbackInfo info){
         if(serverWorld.getTickManager().shouldTick()) {
-            persistentManagerState.getServerWorldState(serverWorld).signalManager.tickSignals(serverWorld);
+            PersistentManagerState.getServerWorldState(serverWorld).signalManager.tickSignals(serverWorld);
         }
     }
 }

@@ -1,8 +1,9 @@
 package com.frogrilla.echoes.common.block;
 
-import com.frogrilla.echoes.signals.Signal;
-import com.frogrilla.echoes.signals.SignalManager;
-import com.frogrilla.echoes.signals.persistentManagerState;
+import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.common.signal.PulseSignal;
+import com.frogrilla.echoes.common.signal.Signal;
+import com.frogrilla.echoes.signal.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -50,9 +51,9 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
     }
 
     public static void doEffects(ServerWorld world, BlockPos pos, Direction direction){
-        Vec3d position = pos.toCenterPos().add(direction.getDoubleVector().multiply(0.365d));
+        // Vec3d position = pos.toCenterPos().add(direction.getDoubleVector().multiply(0.365d));
         //world.spawnParticles(ParticleTypes.SONIC_BOOM, position.x, position.y, position.z, 1, 0, 0, 0, 0);
-        world.playSound((PlayerEntity) null, pos, SoundEvents.ENTITY_FROG_AMBIENT, SoundCategory.BLOCKS);
+        world.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_SCULK_CHARGE, SoundCategory.BLOCKS);
     }
 
     @Override
@@ -71,24 +72,20 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
         if(state.get(POWERED) != powered){
             if(powered){
                 doEffects((ServerWorld) world, pos, state.get(FACING));
-                SignalManager manager = persistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
-                manager.addSignal(new Signal(pos.offset(state.get(FACING)), power, state.get(FACING)));
+                SignalManager manager = PersistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
+                Signal signal = new Signal(pos.offset(state.get(FACING)), state.get(FACING), (byte) power);
+                manager.addSignal(signal);
             }
             world.setBlockState(pos, state.with(POWERED, powered));
         }
     }
 
     @Override
-    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
-        if(state.get(POWERED)){
-            manager.removeSignal(incoming);
-        }
-        else{
-            Direction facing = state.get(FACING);
-            doEffects(serverWorld, incoming.getBlockPos(), facing);
-            incoming.setBlockPos(incoming.getBlockPos().offset(facing));
-            incoming.setDirection(facing);
-            incoming.setPower(SignalManager.defaultPower);
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
+        incoming.removalFlag = true;
+
+        if(!state.get(POWERED)){
+            manager.addSignal(new Signal(incoming.blockPos.offset(state.get(FACING)), state.get(FACING), incoming.frequency));
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.frogrilla.echoes.common.block;
 
-import com.frogrilla.echoes.signals.Signal;
-import com.frogrilla.echoes.signals.SignalManager;
+import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.server.world.ServerWorld;
@@ -51,10 +51,11 @@ public class EchoLatchBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    public void processSignal(Signal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state) {
+    public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         if(!state.get(POWERED)){
-            serverWorld.setBlockState(incoming.getBlockPos(), state.with(FREQUENCY, incoming.getFrequency()));
+            serverWorld.setBlockState(incoming.blockPos, state.with(FREQUENCY, (int)incoming.frequency));
         }
-        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state);
+        ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state, controlsEffects);
     }
+
 }

@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "power=0": {"model": "echoes:block/echo_modulator" },
+    "power=1": {"model": "echoes:block/echo_modulator_1" },
+    "power=2": {"model": "echoes:block/echo_modulator_2" },
+    "power=3": {"model": "echoes:block/echo_modulator_3" },
+    "power=4": {"model": "echoes:block/echo_modulator_4" },
+    "power=5": {"model": "echoes:block/echo_modulator_5" },
+    "power=6": {"model": "echoes:block/echo_modulator_6" },
+    "power=7": {"model": "echoes:block/echo_modulator_7" },
+    "power=8": {"model": "echoes:block/echo_modulator_8" },
+    "power=9": {"model": "echoes:block/echo_modulator_9" },
+    "power=10": {"model": "echoes:block/echo_modulator_10" },
+    "power=11": {"model": "echoes:block/echo_modulator_11" },
+    "power=12": {"model": "echoes:block/echo_modulator_12" },
+    "power=13": {"model": "echoes:block/echo_modulator_13" },
+    "power=14": {"model": "echoes:block/echo_modulator_14" },
+    "power=15": {"model": "echoes:block/echo_modulator_15" }
+  }
+}
