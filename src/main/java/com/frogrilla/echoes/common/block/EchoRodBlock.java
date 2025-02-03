@@ -47,7 +47,14 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
     @Nullable
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return super.getPlacementState(ctx).with(FACING, ctx.getSide());
+        BlockState state = super.getPlacementState(ctx).with(FACING, ctx.getSide());
+        int power = 0;
+        for (Direction direction : DIRECTIONS) {
+            if(direction == state.get(FACING)) continue;
+            BlockPos check = ctx.getBlockPos().offset(direction);
+            power = Math.max(power, ctx.getWorld().getEmittedRedstonePower(check, direction.getOpposite()));
+        }
+        return state.with(POWERED, power > 0);
     }
 
     public static void doEffects(ServerWorld world, BlockPos pos, Direction direction){
@@ -55,6 +62,7 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
         //world.spawnParticles(ParticleTypes.SONIC_BOOM, position.x, position.y, position.z, 1, 0, 0, 0, 0);
         world.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_SCULK_CHARGE, SoundCategory.BLOCKS);
     }
+
 
     @Override
     protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {

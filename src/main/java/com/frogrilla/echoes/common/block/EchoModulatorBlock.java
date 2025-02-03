@@ -12,7 +12,9 @@ import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.world.block.WireOrientation;
 import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
@@ -32,8 +34,11 @@ public class EchoModulatorBlock extends Block implements ISignalInteractor {
     }
 
     @Override
-    protected BlockState getStateForNeighborUpdate(BlockState state, WorldView world, ScheduledTickView tickView, BlockPos pos, Direction direction, BlockPos neighborPos, BlockState neighborState, Random random) {
-        return state.with(POWER, world.getReceivedRedstonePower(pos));
+    protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
+        int power = world.getReceivedRedstonePower(pos);
+        if(power != state.get(POWER)){
+            world.setBlockState(pos, state.with(POWER, power));
+        }
     }
 
     @Nullable
