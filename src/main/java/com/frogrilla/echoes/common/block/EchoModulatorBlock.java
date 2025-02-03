@@ -4,8 +4,11 @@ import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
@@ -49,7 +52,15 @@ public class EchoModulatorBlock extends Block implements ISignalInteractor {
 
     @Override
     public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
-        incoming.frequency = state.get(POWER).byteValue();
-        incoming.tick();
+        byte power = state.get(POWER).byteValue();
+        if(power == 0){
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.ENTITY_IRON_GOLEM_STEP, SoundCategory.BLOCKS);
+            incoming.removalFlag = true;
+        }
+        else{
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_BULB_TURN_ON, SoundCategory.BLOCKS);
+            incoming.frequency = state.get(POWER).byteValue();
+            incoming.tick();
+        }
     }
 }
