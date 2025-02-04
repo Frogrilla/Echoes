@@ -1,5 +1,6 @@
 package com.frogrilla.echoes.common.block;
 
+import com.frogrilla.echoes.common.init.EchoesParticles;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.frogrilla.echoes.common.signal.PulseSignal;
 import com.frogrilla.echoes.common.signal.Signal;
@@ -8,8 +9,10 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.RodBlock;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -48,19 +51,48 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         BlockState state = super.getPlacementState(ctx).with(FACING, ctx.getSide());
-        int power = 0;
-        for (Direction direction : DIRECTIONS) {
-            if(direction == state.get(FACING)) continue;
-            BlockPos check = ctx.getBlockPos().offset(direction);
-            power = Math.max(power, ctx.getWorld().getEmittedRedstonePower(check, direction.getOpposite()));
-        }
-        return state.with(POWERED, power > 0);
+        return state.with(POWERED, getPowered(ctx.getWorld(), ctx.getBlockPos(), state));
     }
 
-    public static void doEffects(ServerWorld world, BlockPos pos, Direction direction){
-        // Vec3d position = pos.toCenterPos().add(direction.getDoubleVector().multiply(0.365d));
-        //world.spawnParticles(ParticleTypes.SONIC_BOOM, position.x, position.y, position.z, 1, 0, 0, 0, 0);
+    @Override
+    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
+        if(world.isClient()) return;
+        if(state.get(POWERED)){
+            emit((ServerWorld) world, pos, state, getPower(world, pos, state));
+        }
+    }
+
+    public void doEffects(ServerWorld world, BlockPos pos, Direction direction){
+        Vec3d position = pos.toCenterPos().add(direction.getDoubleVector().multiply(0.365d));
+        world.spawnParticles(EchoesParticles.ECHO_CHARGE, position.x, position.y, position.z, 1, 0, 0, 0, 0);
         world.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_SCULK_CHARGE, SoundCategory.BLOCKS);
+    }
+
+    public int getPower(World world, BlockPos pos, BlockState state){
+        int power = 0;
+        for(Direction direction: DIRECTIONS){
+            if (direction != state.get(FACING) && world.isEmittingRedstonePower(pos.offset(direction), direction)) {
+                power = Math.max(power, world.getEmittedRedstonePower(pos.offset(direction), direction));
+            }
+        }
+        return power;
+    }
+
+    public boolean getPowered(World world, BlockPos pos, BlockState state){
+        for(Direction direction: DIRECTIONS){
+            if (direction != state.get(FACING) && world.isEmittingRedstonePower(pos.offset(direction), direction)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void emit(ServerWorld world, BlockPos pos, BlockState state, int power){
+        if(power == 0) return;
+        doEffects(world, pos, state.get(FACING));
+        SignalManager manager = PersistentManagerState.getServerWorldState(world).signalManager;
+        Signal signal = new Signal(pos.offset(state.get(FACING)), state.get(FACING), (byte) power);
+        manager.addSignal(signal);
     }
 
 
@@ -68,22 +100,12 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
     protected void neighborUpdate(BlockState state, World world, BlockPos pos, Block sourceBlock, @Nullable WireOrientation wireOrientation, boolean notify) {
         if(world.isClient()) return;
 
-        int power = 0;
-        for (Direction direction : DIRECTIONS) {
-            if(direction == state.get(FACING)) continue;
-            BlockPos check = pos.offset(direction);
-            power = Math.max(power, world.getEmittedRedstonePower(check, direction.getOpposite()));
-        }
+        int power = getPower(world, pos, state);
 
         boolean powered = power > 0;
 
         if(state.get(POWERED) != powered){
-            if(powered){
-                doEffects((ServerWorld) world, pos, state.get(FACING));
-                SignalManager manager = PersistentManagerState.getServerWorldState((ServerWorld) world).signalManager;
-                Signal signal = new Signal(pos.offset(state.get(FACING)), state.get(FACING), (byte) power);
-                manager.addSignal(signal);
-            }
+            if(powered) emit((ServerWorld) world, pos, state, power);
             world.setBlockState(pos, state.with(POWERED, powered));
         }
     }
@@ -93,6 +115,7 @@ public class EchoRodBlock extends RodBlock implements ISignalInteractor{
         incoming.removalFlag = true;
 
         if(!state.get(POWERED)){
+            doEffects(serverWorld, incoming.blockPos, state.get(FACING));
             manager.addSignal(new Signal(incoming.blockPos.offset(state.get(FACING)), state.get(FACING), incoming.frequency));
         }
     }
