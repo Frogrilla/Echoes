@@ -18,13 +18,13 @@ public class EchoesBlocks {
     // Signal interacts
     public static final Block ECHO_ROD = registerBlockWithItem("echo_rod" ,new EchoRodBlock(AbstractBlock.Settings.copy(Blocks.LIGHTNING_ROD).solidBlock(Blocks::never).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_rod")))));
     public static final Block ECHO_HEART = registerBlockWithItem("echo_heart" ,new EchoHeartBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).solidBlock(Blocks::never).pistonBehavior(PistonBehavior.BLOCK).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_heart")))));
-    public static final Block ECHO_LATCH = registerBlockWithItem("echo_latch", new EchoLatchBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).solidBlock(Blocks::never).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_latch")))));
-    public static final Block FLIP_FROG = registerBlockWithItem("flip_frog", new FlipFrogBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_TUFF).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "flip_frog")))));
+    public static final Block ECHO_LATCH = registerBlockWithItem("echo_latch", new EchoLatchBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_latch")))));
+    public static final Block FLIP_FROG = registerBlockWithItem("flip_frog", new FlipFrogBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_TUFF).solidBlock(Blocks::never).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "flip_frog")))));
     public static final Block REFLECTOR = registerBlockWithItem("reflector", new ReflectorBlock(AbstractBlock.Settings.copy(Blocks.GLASS).solidBlock(Blocks::never).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "reflector")))));
     public static final Block ECHO_BLOCKER = registerBlockWithItem("echo_blocker", new EchoBlockerBlock(AbstractBlock.Settings.copy(Blocks.CHISELED_TUFF).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_blocker")))));
     public static final Block ECHO_LOTUS = registerBlockWithItem("echo_lotus", new EchoLotusBlock(AbstractBlock.Settings.copy(Blocks.SPORE_BLOSSOM).solidBlock(Blocks::never).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_lotus")))));
     public static final Block ECHO_BOOSTER = registerBlockWithItem("echo_booster", new EchoBoosterBlock(AbstractBlock.Settings.copy(Blocks.POLISHED_DEEPSLATE).solidBlock(Blocks::never).nonOpaque().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_booster")))));
-    public static final Block ECHO_MODULATOR = registerBlockWithItem("echo_modulator", new EchoModulatorBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).solidBlock(Blocks::never).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_modulator")))));
+    public static final Block ECHO_MODULATOR = registerBlockWithItem("echo_modulator", new EchoModulatorBlock(AbstractBlock.Settings.copy(Blocks.BONE_BLOCK).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_modulator")))));
 
 
     // Extra hidden blocks
