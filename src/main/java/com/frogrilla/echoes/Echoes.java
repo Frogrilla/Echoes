@@ -17,5 +17,6 @@ public class Echoes implements ModInitializer {
 		EchoesParticles.registerParticles();
 		EchoesItemGroups.registerItemGroups();
 		EchoesSignals.registerTypes();
+		EchoesSounds.registerSounds();
 	}
 }

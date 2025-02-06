@@ -1,0 +1,16 @@
+{
+  "echo_rod_activate": {
+    "subtitle": "subtitles.echoes.echo_rod_activate",
+    "sounds": [
+      "echoes:block/echo_rod_activate"
+    ]
+  },
+
+  "corrupted_echo_rod_activate": {
+    "subtitle": "subtitles.echoes.corrupted_echo_rod_activate",
+    "sounds": [
+      "echoes:block/corrupted_echo_rod_activate"
+    ]
+  }
+}
+

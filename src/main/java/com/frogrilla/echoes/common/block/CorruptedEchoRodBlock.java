@@ -1,6 +1,7 @@
 package com.frogrilla.echoes.common.block;
 
 import com.frogrilla.echoes.common.init.EchoesParticles;
+import com.frogrilla.echoes.common.init.EchoesSounds;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.frogrilla.echoes.common.signal.CorruptedSignal;
 import com.frogrilla.echoes.common.signal.Signal;
@@ -28,7 +29,7 @@ public class CorruptedEchoRodBlock extends EchoRodBlock{
     public void doEffects(ServerWorld world, BlockPos pos, Direction direction) {
         Vec3d position = pos.toCenterPos().add(direction.getDoubleVector().multiply(0.365d));
         world.spawnParticles(EchoesParticles.CORRUPTED_ECHO_CHARGE, position.x, position.y, position.z, 1, 0, 0, 0, 0);
-        world.playSound((PlayerEntity) null, pos, SoundEvents.BLOCK_SCULK_CHARGE, SoundCategory.BLOCKS);
+        world.playSound((PlayerEntity) null, pos, EchoesSounds.CORRUPTED_ECHO_ROD_ACTIVATE, SoundCategory.BLOCKS);
     }
 
     @Override
