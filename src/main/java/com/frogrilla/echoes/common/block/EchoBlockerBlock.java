@@ -1,6 +1,7 @@
 package com.frogrilla.echoes.common.block;
 
 import com.frogrilla.echoes.common.init.EchoesItems;
+import com.frogrilla.echoes.common.init.EchoesSounds;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
@@ -79,11 +80,10 @@ public class EchoBlockerBlock extends Block implements ISignalInteractor {
     @Override
     public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state , boolean controlsEffects) {
         if(state.get(getPropertyFromDirection(incoming.direction.getOpposite()))){
-            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.ENTITY_MAGMA_CUBE_HURT_SMALL, SoundCategory.BLOCKS, 1, 1);
             ISignalInteractor.super.processSignal(incoming, manager, serverWorld, state, controlsEffects);
         }
         else{
-            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_POLISHED_TUFF_HIT, SoundCategory.BLOCKS, 1, 1);
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, EchoesSounds.SIGNAL_BLOCKED, SoundCategory.BLOCKS, 1, 1);
             incoming.removalFlag = true;
         }
     }

@@ -1,5 +1,6 @@
 package com.frogrilla.echoes.common.block;
 
+import com.frogrilla.echoes.common.init.EchoesSounds;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
@@ -32,10 +33,10 @@ public class FlipFrogBlock extends Block implements ISignalInteractor {
     @Override
     public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         if(state.get(TRIGGERED)){
-            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_BULB_TURN_OFF, SoundCategory.BLOCKS, 2, 1);
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, EchoesSounds.FLIP_FROG_OFF, SoundCategory.BLOCKS);
         }
         else{
-            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_BULB_TURN_ON, SoundCategory.BLOCKS, 2, 1);
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, EchoesSounds.FLIP_FROG_ON, SoundCategory.BLOCKS);
         }
 
         serverWorld.setBlockState(incoming.blockPos, serverWorld.getBlockState(incoming.blockPos).cycle(TRIGGERED));

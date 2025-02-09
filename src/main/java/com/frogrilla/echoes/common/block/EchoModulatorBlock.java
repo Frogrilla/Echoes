@@ -1,5 +1,6 @@
 package com.frogrilla.echoes.common.block;
 
+import com.frogrilla.echoes.common.init.EchoesSounds;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.frogrilla.echoes.signal.SignalManager;
 import net.minecraft.block.Block;
@@ -13,12 +14,8 @@ import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import net.minecraft.world.block.WireOrientation;
-import net.minecraft.world.tick.ScheduledTickView;
 import org.jetbrains.annotations.Nullable;
 
 public class EchoModulatorBlock extends Block implements ISignalInteractor {
@@ -54,7 +51,7 @@ public class EchoModulatorBlock extends Block implements ISignalInteractor {
     public void processSignal(AbstractSignal incoming, SignalManager manager, ServerWorld serverWorld, BlockState state, boolean controlsEffects) {
         byte power = state.get(POWER).byteValue();
         if(power == 0){
-            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.ENTITY_IRON_GOLEM_STEP, SoundCategory.BLOCKS);
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, EchoesSounds.SIGNAL_BLOCKED, SoundCategory.BLOCKS);
             incoming.removalFlag = true;
         }
         else{

@@ -1,14 +1,11 @@
 package com.frogrilla.echoes.common.signal;
 
-import com.frogrilla.echoes.Echoes;
 import com.frogrilla.echoes.common.init.EchoesParticles;
-import com.frogrilla.echoes.signal.SignalManager;
+import com.frogrilla.echoes.common.init.EchoesSounds;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
@@ -57,7 +54,7 @@ public class Signal extends AbstractSignal{
     @Override
     public void effects(ServerWorld world, Vec3d pos) {
         if(power == 1){
-            world.playSound((PlayerEntity) null, blockPos, SoundEvents.BLOCK_SCULK_BREAK, SoundCategory.BLOCKS);
+            world.playSound((PlayerEntity) null, blockPos, EchoesSounds.SIGNAL_FIZZLE, SoundCategory.BLOCKS);
             world.spawnParticles(EchoesParticles.ECHO_CHARGE, pos.x, pos.y, pos.z, 10, 0, 0, 0, 0.1);
         }
         else{

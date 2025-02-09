@@ -2,14 +2,70 @@
   "echo_rod_activate": {
     "subtitle": "subtitles.echoes.echo_rod_activate",
     "sounds": [
-      "echoes:block/echo_rod_activate"
+      {
+        "name": "echoes:block/echo_rod_activate",
+        "volume": 0.25
+      }
     ]
   },
 
   "corrupted_echo_rod_activate": {
     "subtitle": "subtitles.echoes.corrupted_echo_rod_activate",
     "sounds": [
-      "echoes:block/corrupted_echo_rod_activate"
+      {
+        "name": "echoes:block/corrupted_echo_rod_activate",
+        "volume": 0.25
+      }
+    ]
+  },
+
+  "flip_frog_off": {
+    "subtitle": "subtitles.echoes.flip_frog_off",
+    "sounds": [
+      {
+        "name": "echoes:block/flip_frog_off",
+        "volume": 0.7
+      }
+    ]
+  },
+
+  "flip_frog_on": {
+    "subtitle": "subtitles.echoes.flip_frog_on",
+    "sounds": [
+      {
+        "name": "echoes:block/flip_frog_on",
+        "volume": 0.7
+      }
+    ]
+  },
+
+  "signal_fizzle": {
+    "subtitle": "subtitles.echoes.signal_fizzle",
+    "sounds": [
+      {
+        "name": "echoes:signal/signal_fizzle",
+        "volume": 0.7
+      }
+    ]
+  },
+
+  "corrupted_signal_fizzle": {
+    "subtitle": "subtitles.echoes.corrupted_signal_fizzle",
+    "sounds": [
+      {
+        "name": "echoes:signal/corrupted_signal_fizzle",
+        "volume": 0.7
+      }
+    ]
+  },
+
+  "signal_blocked": {
+    "subtitle": "subtitles.echoes.signal_blocked",
+    "sounds": [
+      {
+        "name": "echoes:signal/signal_blocked",
+        "volume": 0.9
+      }
     ]
   }
 }
