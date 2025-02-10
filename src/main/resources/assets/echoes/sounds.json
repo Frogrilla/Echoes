@@ -39,6 +39,16 @@
     ]
   },
 
+  "modulator_modulate": {
+    "subtitle": "subtitles.echoes.modulator_modulate",
+    "sounds": [
+      {
+        "name": "echoes:block/modulator_modulate",
+        "volume": 0.7
+      }
+    ]
+  },
+
   "signal_fizzle": {
     "subtitle": "subtitles.echoes.signal_fizzle",
     "sounds": [

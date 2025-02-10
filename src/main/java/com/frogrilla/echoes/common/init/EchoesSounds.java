@@ -15,6 +15,9 @@ public class EchoesSounds {
     public static SoundEvent FLIP_FROG_OFF = Register("flip_frog_off");
     public static SoundEvent FLIP_FROG_ON = Register("flip_frog_on");
 
+    // Modulator
+    public static SoundEvent MODULATOR_MODULATE = Register("modulator_modulate");
+
     // Generic signal sounds
     public static SoundEvent SIGNAL_BLOCKED = Register("signal_blocked");
     public static SoundEvent SIGNAL_FIZZLE = Register("signal_fizzle");

@@ -55,8 +55,9 @@ public class EchoModulatorBlock extends Block implements ISignalInteractor {
             incoming.removalFlag = true;
         }
         else{
-            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, SoundEvents.BLOCK_COPPER_BULB_TURN_ON, SoundCategory.BLOCKS);
-            incoming.frequency = state.get(POWER).byteValue();
+            byte frequency = state.get(POWER).byteValue();
+            serverWorld.playSound((PlayerEntity) null, incoming.blockPos, EchoesSounds.MODULATOR_MODULATE, SoundCategory.BLOCKS, 1, 1 + (frequency * 0.06f));
+            incoming.frequency = frequency;
             incoming.tick();
         }
     }
