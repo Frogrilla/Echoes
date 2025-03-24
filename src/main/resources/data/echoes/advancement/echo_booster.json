@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:echo_fragments"
+            "items": "echoes:echo_fragments"
           }
         ]
       },
