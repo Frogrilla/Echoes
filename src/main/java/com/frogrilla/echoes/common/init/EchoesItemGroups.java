@@ -20,15 +20,15 @@ public class EchoesItemGroups {
             entries.addAll(new ArrayList<>() {
                 {
                     add(EchoesBlocks.ECHO_ROD.asItem().getDefaultStack());
-                    add(EchoesBlocks.ECHO_HEART.asItem().getDefaultStack());
+                    add(EchoesBlocks.CORRUPTED_ECHO_ROD.asItem().getDefaultStack());
                     add(EchoesBlocks.ECHO_LATCH.asItem().getDefaultStack());
+                    add(EchoesBlocks.ECHO_MODULATOR.asItem().getDefaultStack());
+                    add(EchoesBlocks.ECHO_HEART.asItem().getDefaultStack());
                     add(EchoesBlocks.FLIP_FROG.asItem().getDefaultStack());
                     add(EchoesBlocks.REFLECTOR.asItem().getDefaultStack());
                     add(EchoesBlocks.ECHO_BLOCKER.asItem().getDefaultStack());
-                    add(EchoesBlocks.ECHO_LOTUS.asItem().getDefaultStack());
                     add(EchoesBlocks.ECHO_BOOSTER.asItem().getDefaultStack());
-                    add(EchoesBlocks.CORRUPTED_ECHO_ROD.asItem().getDefaultStack());
-                    add(EchoesBlocks.ECHO_MODULATOR.asItem().getDefaultStack());
+                    add(EchoesBlocks.ECHO_LOTUS.asItem().getDefaultStack());
                 }
             });
         })
