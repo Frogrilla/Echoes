@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#",
+    "B",
+    "B"
+  ],
+  "key": {
+    "#": "minecraft:echo_shard",
+    "B": "minecraft:bone"
+  },
+  "result": {
+    "id": "echoes:echo_rod",
+    "count": 4
+  }
+}
