@@ -8,7 +8,7 @@
   "key": {
     "B": "minecraft:bone",
     "-": "minecraft:glass_pane",
-    "D": "echoes:echo_dust",
+    "D": "echoes:echo_fragments",
     "#": "minecraft:polished_deepslate"
   },
   "result": {

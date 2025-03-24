@@ -7,7 +7,7 @@
   ],
   "key": {
     "#": "minecraft:bone",
-    "D": "echoes:echo_dust",
+    "D": "echoes:echo_fragments",
     "R": "minecraft:redstone_lamp"
   },
   "result": {

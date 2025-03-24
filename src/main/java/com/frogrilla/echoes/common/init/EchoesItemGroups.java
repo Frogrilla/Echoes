@@ -4,6 +4,7 @@ import com.frogrilla.echoes.Echoes;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -35,12 +36,15 @@ public class EchoesItemGroups {
     );
 
     public static final ItemGroup MATERIALS = registerItemGroup("materials", FabricItemGroup.builder()
-        .icon(() -> new ItemStack(EchoesItems.ECHO_DUST))
+        .icon(() -> new ItemStack(EchoesItems.ECHO_FRAGMENTS))
         .displayName(Text.translatable("itemGroup.echoes.materials"))
         .entries((context, entries) -> {
             entries.addAll(new ArrayList<>() {
                 {
-                    add(EchoesItems.ECHO_DUST.getDefaultStack());
+                    add(Items.ECHO_SHARD.getDefaultStack());
+                    add(EchoesItems.ECHO_FRAGMENTS.getDefaultStack());
+                    add(EchoesItems.CORRUPTED_ECHO_SHARD.getDefaultStack());
+                    add(EchoesItems.CORRUPTED_ECHO_FRAGMENTS.getDefaultStack());
                 }
             });
         })

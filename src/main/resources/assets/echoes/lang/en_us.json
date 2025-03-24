@@ -1,5 +1,6 @@
 {
   "item.echoes.echo_rod": "Echo Rod",
+  "item.echoes.corrupted_echo_rod": "Corrupted Echo Rod",
   "item.echoes.echo_heart": "Echo Heart",
   "item.echoes.echo_latch": "Echo Latch",
   "item.echoes.flip_frog": "Flip Frog",
@@ -8,11 +9,11 @@
   "item.echoes.echo_lotus": "Echo Lotus",
   "item.echoes.echo_booster": "Echo Booster",
   "item.echoes.echo_modulator": "Echo Modulator",
-
   "item.echoes.signal_test_block": "Signal Test Block",
-  "item.echoes.corrupted_echo_rod": "Corrupted Echo Rod",
 
-  "item.echoes.echo_dust": "Echo Dust",
+  "item.echoes.echo_fragments": "Echo Fragments",
+  "item.echoes.corrupted_echo_shard": "Corrupted Echo Shard",
+  "item.echoes.corrupted_echo_fragments": "Corrupted Echo Fragments",
 
   "itemGroup.echoes.technology": "Echoes Technology",
   "itemGroup.echoes.materials": "Echoes Materials"

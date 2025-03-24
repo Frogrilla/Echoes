@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "minecraft:echo_shard"
+            "items": "echoes:corrupted_echo_shard"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "echoes:echo_dust"
+        "recipe": "echoes:corrupted_echo_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "echoes:echo_dust"
+      "echoes:corrupted_echo_rod"
     ]
   }
 }

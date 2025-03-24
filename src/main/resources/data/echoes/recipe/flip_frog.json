@@ -7,7 +7,7 @@
   ],
   "key": {
     "O": "minecraft:observer",
-    "D": "echoes:echo_dust",
+    "D": "echoes:echo_fragments",
     "T": "minecraft:polished_tuff"
   },
   "result": {

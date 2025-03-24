@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_shard": {
+    "has_polished_deepslate": {
       "conditions": {
         "items": [
           {
-            "items": "minecraft:echo_shard"
+            "items": "minecraft:polished_deepslate"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "echoes:echo_rod"
+        "recipe": "echoes:echo_blocker"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_shard"
+      "has_polished_deepslate"
     ]
   ],
   "rewards": {
     "recipes": [
-      "echoes:echo_rod"
+      "echoes:echo_blocker"
     ]
   }
 }

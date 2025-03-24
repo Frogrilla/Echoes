@@ -100,7 +100,7 @@ public class EchoBlockerBlock extends Block implements ISignalInteractor {
                 return ActionResult.CONSUME;
             }
         }
-        else if(stack.getItem() == EchoesItems.ECHO_DUST){
+        else if(stack.getItem() == EchoesItems.ECHO_FRAGMENTS){
             world.playSound((PlayerEntity) null, pos, SoundEvents.ITEM_DYE_USE, SoundCategory.BLOCKS, 1, 1);
             world.setBlockState(pos, state.with(property, true));
             return ActionResult.CONSUME;
