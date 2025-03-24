@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "B-B",
+    "-#-",
+    "B-B"
+  ],
+  "key": {
+    "B": "minecraft:bone",
+    "-": "minecraft:glass_pane",
+    "#": "minecraft:polished_deepslate"
+  },
+  "result": {
+    "id": "echoes:echo_blocker"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#D#",
+    "DRD",
+    "#D#"
+  ],
+  "key": {
+    "#": "minecraft:bone",
+    "D": "echoes:echo_dust",
+    "R": "minecraft:redstone_lamp"
+  },
+  "result": {
+    "id": "echoes:echo_latch"
+  }
+}

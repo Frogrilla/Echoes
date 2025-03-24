@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "TDT",
+    "DOD",
+    "TDT"
+  ],
+  "key": {
+    "O": "minecraft:observer",
+    "D": "echoes:echo_dust",
+    "T": "minecraft:polished_tuff"
+  },
+  "result": {
+    "id": "echoes:flip_frog"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "echoes:echo_booster",
+    "echoes:echo_heart",
+    "echoes:echo_latch",
+    "echoes:echo_modulator",
+    "echoes:flip_frog",
+    "echoes:reflector",
+    "echoes:echo_blocker"
+  ]
+}
+

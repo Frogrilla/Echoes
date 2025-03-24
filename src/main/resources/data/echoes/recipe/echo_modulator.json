@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iQi",
+    "DRD",
+    "iQi"
+  ],
+  "key": {
+    "i": "minecraft:iron_ingot",
+    "Q": "minecraft:quartz",
+    "D": "echoes:echo_dust",
+    "R": "minecraft:redstone_block"
+  },
+  "result": {
+    "id": "echoes:echo_modulator"
+  }
+}

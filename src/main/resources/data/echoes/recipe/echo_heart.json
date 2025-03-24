@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BRB",
+    "DDD",
+    "BRB"
+  ],
+  "key": {
+    "B": "minecraft:bone",
+    "D": "echoes:echo_dust",
+    "R": "minecraft:redstone"
+  },
+  "result": {
+    "id": "echoes:echo_heart"
+  }
+}
