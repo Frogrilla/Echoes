@@ -29,6 +29,7 @@ public class EchoesItemGroups {
                     add(EchoesBlocks.ECHO_BLOCKER.asItem().getDefaultStack());
                     add(EchoesBlocks.ECHO_BOOSTER.asItem().getDefaultStack());
                     add(EchoesBlocks.ECHO_LOTUS.asItem().getDefaultStack());
+                    add(EchoesBlocks.CRYSTALISATION_TABLE.asItem().getDefaultStack());
                 }
             });
         })

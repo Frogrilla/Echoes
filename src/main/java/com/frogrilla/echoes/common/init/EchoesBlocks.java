@@ -26,7 +26,7 @@ public class EchoesBlocks {
     public static final Block ECHO_LOTUS = registerBlockWithItem("echo_lotus", new EchoLotusBlock(AbstractBlock.Settings.create().breakInstantly().solidBlock(Blocks::never).nonOpaque().pistonBehavior(PistonBehavior.DESTROY).sounds(BlockSoundGroup.SPORE_BLOSSOM).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_lotus")))));
     public static final Block ECHO_BOOSTER = registerBlockWithItem("echo_booster", new EchoBoosterBlock(AbstractBlock.Settings.create().strength(1F).solidBlock(Blocks::never).nonOpaque().sounds(BlockSoundGroup.BONE).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_booster")))));
     public static final Block ECHO_MODULATOR = registerBlockWithItem("echo_modulator", new EchoModulatorBlock(AbstractBlock.Settings.create().strength(1F).solidBlock(Blocks::never).sounds(BlockSoundGroup.METAL).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "echo_modulator")))));
-
+    public static final Block CRYSTALISATION_TABLE = registerBlockWithItem("crystalisation_table", new CrystalisationTableBlock(AbstractBlock.Settings.create().strength(3F).nonOpaque().solidBlock(Blocks::never).pistonBehavior(PistonBehavior.IGNORE).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "crystalisation_table")))));
 
     // Extra hidden blocks
     public static final Block CORRUPTED_ECHO_ROD = registerBlockWithItem("corrupted_echo_rod" ,new CorruptedEchoRodBlock(AbstractBlock.Settings.create().breakInstantly().solidBlock(Blocks::never).nonOpaque().sounds(BlockSoundGroup.BONE).registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(Echoes.MOD_ID, "corrupted_echo_rod")))));
