@@ -1,6 +1,8 @@
 package com.frogrilla.echoes.render.blockentity;
 
 import com.frogrilla.echoes.common.block.entity.CrystalisationTableBlockEntity;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.block.entity.BlockEntityRenderer;
@@ -15,8 +17,8 @@ import net.minecraft.util.math.Vec3d;
 import org.joml.AxisAngle4d;
 import org.joml.Vector3d;
 
+@Environment(EnvType.CLIENT)
 public class CrystalisationTableRenderer implements BlockEntityRenderer<CrystalisationTableBlockEntity> {
-    private static final ItemStack stack = new ItemStack(Items.ECHO_SHARD);
 
     public CrystalisationTableRenderer(BlockEntityRendererFactory.Context ctx) {}
     @Override
@@ -28,7 +30,7 @@ public class CrystalisationTableRenderer implements BlockEntityRenderer<Crystali
         matrices.multiply(RotationAxis.NEGATIVE_X.rotationDegrees(90));
         matrices.translate(0, -0.125f, 0);
 
-        MinecraftClient.getInstance().getItemRenderer().renderItem(stack, ModelTransformationMode.GROUND, light, overlay, matrices, vertexConsumers, entity.getWorld(), 0);
+        MinecraftClient.getInstance().getItemRenderer().renderItem(entity.heldItem, ModelTransformationMode.GROUND, light, overlay, matrices, vertexConsumers, entity.getWorld(), 0);
         matrices.pop();
     }
 }

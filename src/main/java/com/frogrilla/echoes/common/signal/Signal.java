@@ -61,4 +61,12 @@ public class Signal extends AbstractSignal{
             world.spawnParticles(EchoesParticles.ECHO_CHARGE, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
         }
     }
+
+    @Override
+    public AbstractSignal copy() {
+        Signal copy = new Signal(blockPos, direction, frequency);
+        copy.power = power;
+        copy.removalFlag = removalFlag;
+        return copy;
+    }
 }

@@ -73,4 +73,12 @@ public class CorruptedSignal extends AbstractSignal{
             world.spawnParticles(EchoesParticles.CORRUPTED_ECHO_CHARGE, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
         }
     }
+
+    @Override
+    public AbstractSignal copy() {
+        CorruptedSignal copy = new CorruptedSignal(blockPos, direction, frequency);
+        copy.power = power;
+        copy.removalFlag = removalFlag;
+        return copy;
+    }
 }

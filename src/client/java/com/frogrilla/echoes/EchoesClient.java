@@ -3,11 +3,14 @@ package com.frogrilla.echoes;
 import com.frogrilla.echoes.common.init.EchoesBlockEntities;
 import com.frogrilla.echoes.common.init.EchoesBlocks;
 import com.frogrilla.echoes.common.init.EchoesParticles;
+import com.frogrilla.echoes.common.init.EchoesScreenHandlers;
+import com.frogrilla.echoes.gui.screen.CrystalisationTableScreen;
 import com.frogrilla.echoes.particle.EchoChargeParticle;
 import com.frogrilla.echoes.render.blockentity.CrystalisationTableRenderer;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
+import net.minecraft.client.gui.screen.ingame.HandledScreens;
 import net.minecraft.client.particle.SculkChargePopParticle;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.block.entity.BlockEntityRendererFactories;
@@ -25,5 +28,7 @@ public class EchoesClient implements ClientModInitializer {
 		BlockRenderLayerMap.INSTANCE.putBlock(EchoesBlocks.CRYSTALISATION_TABLE, RenderLayer.getCutout());
 
 		BlockEntityRendererFactories.register(EchoesBlockEntities.CRYSTALISATION_TABLE_BLOCK_ENTITY, CrystalisationTableRenderer::new);
+
+		HandledScreens.register(EchoesScreenHandlers.CRYSTALISATION_TABLE_SCREEN_HANDLER, CrystalisationTableScreen::new);
 	}
 }

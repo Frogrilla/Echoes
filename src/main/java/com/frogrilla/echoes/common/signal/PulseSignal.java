@@ -56,4 +56,11 @@ public class PulseSignal extends AbstractSignal{
         world.spawnParticles(EchoesParticles.ECHO_CHARGE, pos.x+0.5, pos.y+0.5, pos.z-0.5, 1, 0, 0, 0, 0);
         world.spawnParticles(EchoesParticles.ECHO_CHARGE, pos.x+0.5, pos.y+0.5, pos.z+0.5, 1, 0, 0, 0, 0);
     }
+
+    @Override
+    public AbstractSignal copy() {
+        PulseSignal copy = new PulseSignal(blockPos, direction, frequency);
+        copy.removalFlag = removalFlag;
+        return copy;
+    }
 }

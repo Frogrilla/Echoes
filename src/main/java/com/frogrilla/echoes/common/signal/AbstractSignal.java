@@ -85,4 +85,5 @@ public abstract class AbstractSignal {
      */
     public abstract void effects(ServerWorld world, Vec3d pos);
 
+    public abstract AbstractSignal copy();
 }
