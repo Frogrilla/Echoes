@@ -29,6 +29,8 @@ public abstract class AbstractSignal {
     public abstract SignalTickResult tick(SignalInteractionResult interactionResult, SignalManager signalManager, ServerLevel serverLevel, BlockState blockState);
     public abstract void onRemove(SignalManager signalManager, ServerLevel serverLevel, BlockState blockState);
 
+    public abstract void doEffects(ServerLevel serverLevel, BlockState blockState, SignalTickResult signalTickResult);
+
     @Override
     public String toString() {
         return String.format("%s %s %s %d", SignalType.REGISTRY.getKey(this.getType()).toString(), this.getBlockPos().toShortString(), this.getDirection().toString(), this.getStrength());

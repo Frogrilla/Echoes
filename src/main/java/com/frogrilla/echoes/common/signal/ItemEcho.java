@@ -7,7 +7,10 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
@@ -64,5 +67,19 @@ public class ItemEcho extends Echo {
             item.push(this.direction.getOpposite().getUnitVec3().scale(0.6f).offsetRandom(RandomSource.create(), 0.1f));
         }
         serverLevel.addFreshEntity(item);
+    }
+
+    @Override
+    public void doEffects(ServerLevel serverLevel, BlockState blockState, SignalTickResult signalTickResult) {
+        Vec3 pos = this.getBlockPos().getCenter();
+        switch(signalTickResult){
+            case CONTINUE -> {
+                serverLevel.sendParticles(ParticleTypes.COPPER_FIRE_FLAME, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+            }
+            case REMOVE -> {
+                serverLevel.sendParticles(ParticleTypes.COPPER_FIRE_FLAME, pos.x, pos.y, pos.z, 10, 0, 0, 0, 0.1);
+                serverLevel.playSound(null, this.getBlockPos(), SoundEvents.BUBBLE_POP, SoundSource.BLOCKS, 3, 1);
+            }
+        }
     }
 }

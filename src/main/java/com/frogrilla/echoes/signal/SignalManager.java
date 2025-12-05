@@ -59,15 +59,6 @@ public class SignalManager extends SavedData {
             AbstractSignal signal = iter.next();
             if(serverLevel.shouldTickBlocksAt(signal.getBlockPos())) {
 
-                // Test visuals
-                Vec3 pos = signal.getBlockPos().getCenter();
-                if (signal.getType() == EchoesSignalTypes.ECHO) {
-                    serverLevel.sendParticles(ParticleTypes.SCULK_CHARGE_POP, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
-                } else {
-                    serverLevel.sendParticles(ParticleTypes.ELECTRIC_SPARK, pos.x, pos.y, pos.z, 10, 0, 0, 0, 0.5);
-                }
-
-                // Signal handling:
                 BlockState blockState = serverLevel.getBlockState(signal.getBlockPos());
 
                 // preTick to allow for signals to not tick every tick.
@@ -82,6 +73,8 @@ public class SignalManager extends SavedData {
 
                 // Process signal tick.
                 SignalTickResult tickResult = signal.tick(interactionResult, this, serverLevel, blockState);
+
+                signal.doEffects(serverLevel, blockState, tickResult);
 
                 // Handle result.
                 if(tickResult == SignalTickResult.REMOVE){

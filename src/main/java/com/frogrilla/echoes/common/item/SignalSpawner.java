@@ -30,7 +30,7 @@ public class SignalSpawner extends Item {
                         useOnContext.getClickedFace(),
                         15
                     ),
-                    new ItemStack(Items.GOLD_NUGGET, 16)
+                    new ItemStack(Items.COPPER_NUGGET, 64)
             );
             signalManager.addSignal(echo);
         }
