@@ -3,6 +3,7 @@ package com.frogrilla.echoes.common.item;
 import com.frogrilla.echoes.common.signal.CorruptedEcho;
 import com.frogrilla.echoes.common.signal.Echo;
 import com.frogrilla.echoes.common.signal.ItemEcho;
+import com.frogrilla.echoes.common.signal.PulseEcho;
 import com.frogrilla.echoes.signal.SignalManager;
 import com.frogrilla.echoes.signal.SignalProperties;
 import net.minecraft.server.level.ServerLevel;
@@ -24,13 +25,12 @@ public class SignalSpawner extends Item {
         Level level = useOnContext.getLevel();
         if(!level.isClientSide()) {
             SignalManager signalManager = SignalManager.getSignalManager((ServerLevel) level);
-            ItemEcho echo = new ItemEcho(
+            PulseEcho echo = new PulseEcho(
                     new SignalProperties(
-                        useOnContext.getClickedPos().relative(useOnContext.getClickedFace()),
+                        useOnContext.getClickedPos(),
                         useOnContext.getClickedFace(),
                         15
-                    ),
-                    new ItemStack(Items.COPPER_NUGGET, 64)
+                    )
             );
             signalManager.addSignal(echo);
         }

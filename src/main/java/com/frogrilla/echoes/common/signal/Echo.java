@@ -96,6 +96,11 @@ public class Echo extends AbstractSignal {
     }
 
     @Override
+    public void onAppend(SignalManager signalManager, ServerLevel serverLevel, BlockState blockState) {
+        doEffects(serverLevel, blockState, SignalTickResult.CONTINUE);
+    }
+
+    @Override
     public void doEffects(ServerLevel serverLevel, BlockState blockState, SignalTickResult signalTickResult) {
         Vec3 pos = this.getBlockPos().getCenter();
         switch(signalTickResult){

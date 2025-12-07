@@ -53,12 +53,19 @@ public class SignalManager extends SavedData {
 
     public void tick(ServerLevel serverLevel) {
 
+        signalBuffer.forEach(signal -> {
+            BlockState blockState = serverLevel.getBlockState(signal.getBlockPos());
+            signal.onAppend(this, serverLevel, blockState);
+        });
+
+        signals.addAll(signalBuffer);
+        signalBuffer.clear();
+
         ListIterator<AbstractSignal> iter = signals.listIterator();
 
         while(iter.hasNext()){
             AbstractSignal signal = iter.next();
             if(serverLevel.shouldTickBlocksAt(signal.getBlockPos())) {
-
                 BlockState blockState = serverLevel.getBlockState(signal.getBlockPos());
 
                 // preTick to allow for signals to not tick every tick.
@@ -74,6 +81,7 @@ public class SignalManager extends SavedData {
                 // Process signal tick.
                 SignalTickResult tickResult = signal.tick(interactionResult, this, serverLevel, blockState);
 
+                // Signal effects (particles / sounds)
                 signal.doEffects(serverLevel, blockState, tickResult);
 
                 // Handle result.
@@ -84,8 +92,6 @@ public class SignalManager extends SavedData {
             }
         }
 
-        signals.addAll(signalBuffer);
-        signalBuffer.clear();
         Collections.shuffle(signals);
     };
 
