@@ -105,7 +105,7 @@ public class Echo extends AbstractSignal {
         Vec3 pos = this.getBlockPos().getCenter();
         switch(signalTickResult){
             case CONTINUE -> {
-                serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
+                //serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 1, 0, 0, 0, 0);
             }
             case REMOVE -> {
                 serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pos.x, pos.y, pos.z, 10, 0, 0, 0, 0.1);

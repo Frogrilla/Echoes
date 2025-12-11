@@ -7,7 +7,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.UUID;
+
 public abstract class AbstractSignal {
+
+    public UUID uuid = UUID.randomUUID();
 
     // Type stuff
     public static Codec<AbstractSignal> SIGNAL_CODEC = SignalType.REGISTRY.byNameCodec()

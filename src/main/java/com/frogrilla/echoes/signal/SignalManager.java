@@ -1,15 +1,17 @@
 package com.frogrilla.echoes.signal;
 
 import com.frogrilla.echoes.common.block.iSignalInteractor;
-import com.frogrilla.echoes.common.init.EchoesSignalTypes;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
+import com.frogrilla.echoes.networking.SignalRemovePayload;
+import com.frogrilla.echoes.networking.SignalUpdatePayload;
 import com.mojang.serialization.Codec;
-import net.minecraft.core.particles.ParticleTypes;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
 
@@ -86,8 +88,19 @@ public class SignalManager extends SavedData {
 
                 // Handle result.
                 if(tickResult == SignalTickResult.REMOVE){
+                    PlayerLookup.world(serverLevel).forEach(player -> {
+                        SignalRemovePayload payload = new SignalRemovePayload(signal.uuid);
+                        ServerPlayNetworking.send(player, payload);
+                    });
+
                     signal.onRemove(this, serverLevel, blockState);
                     iter.remove();
+                }
+                else{
+                    PlayerLookup.world(serverLevel).forEach(player -> {
+                        SignalUpdatePayload payload = new SignalUpdatePayload(signal.getBlockPos(), signal.uuid);
+                        ServerPlayNetworking.send(player, payload);
+                    });
                 }
             }
         }
