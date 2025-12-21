@@ -6,8 +6,17 @@ import com.frogrilla.echoes.signal.SignalTypeArgument;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.ArgumentTypeRegistry;
+import net.minecraft.Util;
 import net.minecraft.commands.synchronization.SingletonArgumentInfo;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.JukeboxSong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +32,7 @@ public class Echoes implements ModInitializer {
         EchoesBlocks.registerBlocks();
         EchoesItems.registerItems();
         EchoesPacketPayloads.registerPacketPayloads();
+        EchoesAttatchmentTypes.registerAttatchmentTypes();
 
         ArgumentTypeRegistry.registerArgumentType(
                 ResourceLocation.fromNamespaceAndPath(MOD_ID, "signal_type"),

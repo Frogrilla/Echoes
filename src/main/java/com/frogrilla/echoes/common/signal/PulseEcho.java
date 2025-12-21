@@ -103,4 +103,5 @@ public class PulseEcho extends AbstractSignal{
         serverLevel.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, pos.x-0.5f, pos.y-0.5f, pos.z-0.5f, 1, 0, 0, 0, 0);
         serverLevel.playSound(null, this.getBlockPos(), SoundEvents.SCULK_BLOCK_CHARGE, SoundSource.BLOCKS, 3, 1);
     }
+
 }

@@ -2,8 +2,14 @@ package com.frogrilla.echoes.common.signal;
 
 import com.frogrilla.echoes.signal.*;
 import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.MappedRegistry;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.codec.StreamEncoder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -14,7 +20,7 @@ public abstract class AbstractSignal {
     public UUID uuid = UUID.randomUUID();
 
     // Type stuff
-    public static Codec<AbstractSignal> SIGNAL_CODEC = SignalType.REGISTRY.byNameCodec()
+    public static Codec<AbstractSignal> CODEC = SignalType.REGISTRY.byNameCodec()
             .dispatch("type", AbstractSignal::getType, SignalType::codec);
 
     public abstract SignalType<?> getType();

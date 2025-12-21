@@ -1,42 +1,34 @@
 package com.frogrilla.echoes.signal;
 
+import com.frogrilla.echoes.Echoes;
 import com.frogrilla.echoes.common.block.iSignalInteractor;
+import com.frogrilla.echoes.common.init.EchoesAttatchmentTypes;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
-import com.frogrilla.echoes.networking.SignalRemovePayload;
-import com.frogrilla.echoes.networking.SignalUpdatePayload;
 import com.mojang.serialization.Codec;
-import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
-import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import io.netty.buffer.ByteBuf;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentSyncPredicate;
+import net.fabricmc.fabric.api.attachment.v1.AttachmentType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.ExtraCodecs;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.saveddata.SavedData;
-import net.minecraft.world.level.saveddata.SavedDataType;
 
 import java.util.*;
 
-public class SignalManager extends SavedData {
+public class SignalManager {
 
-    private static final Codec<SignalManager> CODEC = AbstractSignal.SIGNAL_CODEC.listOf().xmap(
+    public static final Codec<SignalManager> CODEC = AbstractSignal.CODEC.listOf().xmap(
             SignalManager::new,
             SignalManager::getSignals
     );
 
-    private static final SavedDataType<SignalManager> TYPE = new SavedDataType<>(
-            "signal_manager", // The unique name for this saved data.
-            SignalManager::new, // If there's no 'SavedBlockData', yet create one and refresh fields.
-            CODEC, // The codec used for serialization/deserialization.
-            null // A data fixer, which is not needed here.
-    );
-
-    public static SignalManager getSignalManager(ServerLevel level) {
-        if(level == null) return null;
-
-        SignalManager savedData = level.getDataStorage().computeIfAbsent(TYPE);
-        savedData.setDirty();
-
-        return savedData;
-    }
+    public static final StreamCodec<RegistryFriendlyByteBuf, SignalManager> STREAM_CODEC = ByteBufCodecs.fromCodecWithRegistries(CODEC);
 
     private List<AbstractSignal> signals = new LinkedList<>();
     private List<AbstractSignal> signalBuffer = new LinkedList<>();
@@ -68,6 +60,7 @@ public class SignalManager extends SavedData {
         while(iter.hasNext()){
             AbstractSignal signal = iter.next();
             if(serverLevel.shouldTickBlocksAt(signal.getBlockPos())) {
+                BlockPos lastPos = signal.getBlockPos();
                 BlockState blockState = serverLevel.getBlockState(signal.getBlockPos());
 
                 // preTick to allow for signals to not tick every tick.
@@ -88,27 +81,37 @@ public class SignalManager extends SavedData {
 
                 // Handle result.
                 if(tickResult == SignalTickResult.REMOVE){
-                    PlayerLookup.world(serverLevel).forEach(player -> {
-                        SignalRemovePayload payload = new SignalRemovePayload(signal.uuid);
-                        ServerPlayNetworking.send(player, payload);
-                    });
+//                    PlayerLookup.world(serverLevel).forEach(player -> {
+//                        SignalRemovePayload payload = new SignalRemovePayload(signal.uuid);
+//                        ServerPlayNetworking.send(player, payload);
+//                    });
 
                     signal.onRemove(this, serverLevel, blockState);
                     iter.remove();
                 }
-                else{
-                    PlayerLookup.world(serverLevel).forEach(player -> {
-                        SignalUpdatePayload payload = new SignalUpdatePayload(signal.getBlockPos(), signal.uuid);
-                        ServerPlayNetworking.send(player, payload);
-                    });
-                }
+//                else{
+//                    PlayerLookup.world(serverLevel).forEach(player -> {
+//                        SignalUpdatePayload payload = new SignalUpdatePayload(new SignalInterpolator(lastPos.getCenter(), signal.getBlockPos().getCenter()), signal.uuid);
+//                        ServerPlayNetworking.send(player, payload);
+//                    });
+//                }
             }
         }
 
         Collections.shuffle(signals);
+
+        serverLevel.modifyAttached(EchoesAttatchmentTypes.SIGNAL_MANAGER_ATTACHMENT_TYPE, (s) -> this);
     };
 
     public List<AbstractSignal> getSignals() {
         return signals;
+    }
+
+    public int getSignalCount() {
+        return signals.size();
+    }
+
+    public static SignalManager getSignalManager(Level level){
+        return level.getAttachedOrSet(EchoesAttatchmentTypes.SIGNAL_MANAGER_ATTACHMENT_TYPE, new SignalManager());
     }
 }

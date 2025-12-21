@@ -2,6 +2,8 @@ package com.frogrilla.echoes.render.signal;
 
 import com.frogrilla.echoes.Echoes;
 import com.frogrilla.echoes.EchoesClient;
+import com.frogrilla.echoes.common.init.EchoesAttatchmentTypes;
+import com.frogrilla.echoes.signal.SignalManager;
 import com.mojang.blaze3d.buffers.GpuBuffer;
 import com.mojang.blaze3d.buffers.GpuBufferSlice;
 import com.mojang.blaze3d.pipeline.RenderPipeline;
@@ -16,8 +18,16 @@ import net.minecraft.client.renderer.MappableRingBuffer;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.ShapeRenderer;
+import net.minecraft.client.renderer.block.ModelBlockRenderer;
+import net.minecraft.client.renderer.block.model.BlockModel;
+import net.minecraft.client.renderer.block.model.BlockStateModel;
+import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
 import org.lwjgl.system.MemoryUtil;
@@ -31,8 +41,8 @@ public class DebugSignalRenderer {
 
     private static final RenderPipeline DEBUG_SIGNAL = RenderPipelines.register(RenderPipeline.builder(RenderPipelines.DEBUG_FILLED_SNIPPET)
             .withLocation(ResourceLocation.fromNamespaceAndPath(Echoes.MOD_ID, "pipeline/debug_signal"))
-            .withVertexFormat(DefaultVertexFormat.POSITION_COLOR, VertexFormat.Mode.TRIANGLE_STRIP)
-            .withDepthTestFunction(DepthTestFunction.NO_DEPTH_TEST)
+            .withVertexFormat(DefaultVertexFormat.POSITION, VertexFormat.Mode.TRIANGLE_STRIP)
+            .withDepthTestFunction(DepthTestFunction.LESS_DEPTH_TEST)
             .build()
     );
 
@@ -51,10 +61,14 @@ public class DebugSignalRenderer {
             buffer = new BufferBuilder(allocator, DEBUG_SIGNAL.getVertexFormatMode(), DEBUG_SIGNAL.getVertexFormat());
         }
 
-        EchoesClient.signalMap.forEach((uuid, blockPos) -> {
-            Vec3 pos = blockPos.getCenter();
-            ShapeRenderer.addChainedFilledBoxVertices(matrices, buffer, pos.x - 0.1f, pos.y - 0.1f, pos.z -0.1f, pos.x + 0.1f, pos.y + 0.1f, pos.z + 0.1f, 0f, 1f, 0f, 1f);
-        });
+        if(Minecraft.getInstance().level != null) {
+            SignalManager manager = SignalManager.getSignalManager(Minecraft.getInstance().level);
+
+            manager.getSignals().forEach(signal -> {
+                final var pos = signal.getBlockPos().getCenter();
+                ShapeRenderer.addChainedFilledBoxVertices(matrices, buffer, pos.x - 0.2f, pos.y - 0.2f, pos.z - 0.2f, pos.x + 0.2f, pos.y + 0.2f, pos.z + 0.2f, 0f, 1f, 0f, 1f);
+            });
+        }
 
 
         matrices.popPose();

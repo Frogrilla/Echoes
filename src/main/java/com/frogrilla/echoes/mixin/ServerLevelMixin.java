@@ -23,8 +23,7 @@ public class ServerLevelMixin {
     @Inject(at = @At(value = "TAIL"), method = "tick")
     public void tick(BooleanSupplier shouldKeepTicking, CallbackInfo info){
         if(serverLevel.tickRateManager().runsNormally()) {
-            SignalManager signalManager = SignalManager.getSignalManager(serverLevel);
-            signalManager.tick(serverLevel);
+            SignalManager.getSignalManager(serverLevel).tick(serverLevel);
         }
     }
 }
