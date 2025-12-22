@@ -22,6 +22,7 @@ public class ItemEcho extends Echo {
             BlockPos.CODEC.fieldOf("block_pos").forGetter(ItemEcho::getBlockPos),
             Direction.CODEC.fieldOf("direction").forGetter(ItemEcho::getDirection),
             Codec.BYTE.fieldOf("strength").forGetter(ItemEcho::getStrength),
+            Codec.INT.fieldOf("id").forGetter(ItemEcho::getID),
             ItemStack.CODEC.fieldOf("item").forGetter(ItemEcho::getItem)
     ).apply(instance, ItemEcho::new));
 
@@ -32,8 +33,8 @@ public class ItemEcho extends Echo {
         return EchoesSignalTypes.ITEM_ECHO;
     }
 
-    public ItemEcho(BlockPos blockPos, Direction direction, int strength, ItemStack item) {
-        super(blockPos, direction, strength);
+    public ItemEcho(BlockPos blockPos, Direction direction, int strength, int id, ItemStack item) {
+        super(blockPos, direction, strength, id);
         this.item = item;
     }
 
@@ -46,7 +47,7 @@ public class ItemEcho extends Echo {
         super(properties);
     }
 
-    public ItemEcho() {};
+    public ItemEcho() { super(); };
 
     public void setItem(ItemStack item) {
         this.item = item;

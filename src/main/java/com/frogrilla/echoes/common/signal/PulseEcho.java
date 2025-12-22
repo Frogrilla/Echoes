@@ -18,7 +18,8 @@ public class PulseEcho extends AbstractSignal{
 
     public static final MapCodec<PulseEcho> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BlockPos.CODEC.fieldOf("block_pos").forGetter(PulseEcho::getBlockPos),
-            Codec.BYTE.fieldOf("strength").forGetter(PulseEcho::getStrength)
+            Codec.BYTE.fieldOf("strength").forGetter(PulseEcho::getStrength),
+            Codec.INT.fieldOf("id").forGetter(PulseEcho::getID)
     ).apply(instance, PulseEcho::new));
 
     BlockPos blockPos = BlockPos.ZERO;
@@ -29,9 +30,10 @@ public class PulseEcho extends AbstractSignal{
         return EchoesSignalTypes.PULSE_ECHO;
     }
 
-    public PulseEcho(BlockPos blockPos, int strength) {
+    public PulseEcho(BlockPos blockPos, int strength, int id) {
         this.blockPos = blockPos;
         this.strength = (byte) strength;
+        this.id = id;
     }
 
     public PulseEcho(SignalProperties properties) {

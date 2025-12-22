@@ -1,19 +1,24 @@
 package com.frogrilla.echoes.signal;
 
 import com.frogrilla.echoes.common.block.iSignalInteractor;
-import com.frogrilla.echoes.common.init.EchoesSignalTypes;
+import com.frogrilla.echoes.common.payload.SignalUpdatePayload;
 import com.frogrilla.echoes.common.signal.AbstractSignal;
 import com.mojang.serialization.Codec;
-import net.minecraft.core.particles.ParticleTypes;
+import com.mojang.serialization.Keyable;
+import io.netty.buffer.ByteBuf;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.minecraft.world.level.saveddata.SavedDataType;
-import net.minecraft.world.phys.Vec3;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 public class SignalManager extends SavedData {
+
+    private int freeID = 0;
 
     private static final Codec<SignalManager> CODEC = AbstractSignal.SIGNAL_CODEC.listOf().xmap(
             SignalManager::new,
@@ -26,6 +31,11 @@ public class SignalManager extends SavedData {
             CODEC, // The codec used for serialization/deserialization.
             null // A data fixer, which is not needed here.
     );
+
+    public Codec<Double> getValue(String key) {
+        return Codec.DOUBLE;
+    }
+
 
     public static SignalManager getSignalManager(ServerLevel level) {
         if(level == null) return null;
@@ -54,6 +64,7 @@ public class SignalManager extends SavedData {
     public void tick(ServerLevel serverLevel) {
 
         signalBuffer.forEach(signal -> {
+            signal.setID(this.getNextSignalID());
             BlockState blockState = serverLevel.getBlockState(signal.getBlockPos());
             signal.onAppend(this, serverLevel, blockState);
         });
@@ -62,6 +73,8 @@ public class SignalManager extends SavedData {
         signalBuffer.clear();
 
         ListIterator<AbstractSignal> iter = signals.listIterator();
+
+        List<Integer> removedIDs = new ArrayList<>();
 
         while(iter.hasNext()){
             AbstractSignal signal = iter.next();
@@ -86,16 +99,32 @@ public class SignalManager extends SavedData {
 
                 // Handle result.
                 if(tickResult == SignalTickResult.REMOVE){
+                    removedIDs.add(signal.getID());
+                    freeID = Math.min(signal.getID(), freeID);
                     signal.onRemove(this, serverLevel, blockState);
                     iter.remove();
                 }
             }
         }
 
-        Collections.shuffle(signals);
+        PlayerLookup.world(serverLevel).forEach(player -> {
+            SignalUpdatePayload payload = new SignalUpdatePayload(this.signals, removedIDs);
+            ServerPlayNetworking.send(player, payload);
+        });
     };
 
     public List<AbstractSignal> getSignals() {
         return signals;
+    }
+
+    public int getNextSignalID() {
+        final var ID = freeID;
+        freeID++;
+        signals.forEach(signal -> {
+            if(signal.getID() == freeID){
+                freeID++;
+            }
+        });
+        return ID;
     }
 }

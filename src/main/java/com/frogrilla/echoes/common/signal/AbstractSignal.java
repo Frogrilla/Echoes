@@ -7,6 +7,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
 
+import java.util.UUID;
+
 public abstract class AbstractSignal {
 
     // Type stuff
@@ -19,6 +21,8 @@ public abstract class AbstractSignal {
         return type.factory().apply(properties);
     };
 
+    protected int id;
+
     // Methods for interactors to mutate signals
     public abstract void setBlockPos(BlockPos blockPos);
     public abstract void setDirection(Direction direction);
@@ -28,6 +32,14 @@ public abstract class AbstractSignal {
     public abstract BlockPos getBlockPos();
     public abstract Direction getDirection();
     public abstract byte getStrength();
+
+    public int getID() {
+        return this.id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
 
     // Signal processing
     public abstract SignalStatus preTick(SignalManager signalManager, ServerLevel serverLevel, BlockState blockState);

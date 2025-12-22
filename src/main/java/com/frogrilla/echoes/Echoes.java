@@ -1,9 +1,6 @@
 package com.frogrilla.echoes;
 
-import com.frogrilla.echoes.common.init.EchoesBlocks;
-import com.frogrilla.echoes.common.init.EchoesCommands;
-import com.frogrilla.echoes.common.init.EchoesItems;
-import com.frogrilla.echoes.common.init.EchoesSignalTypes;
+import com.frogrilla.echoes.common.init.*;
 import com.frogrilla.echoes.signal.DirectionArgument;
 import com.frogrilla.echoes.signal.SignalTypeArgument;
 import net.fabricmc.api.ModInitializer;
@@ -25,6 +22,7 @@ public class Echoes implements ModInitializer {
         EchoesSignalTypes.registerSignalTypes();
         EchoesBlocks.registerBlocks();
         EchoesItems.registerItems();
+        EchoesPacketPayloads.registerPacketPayloads();
 
         ArgumentTypeRegistry.registerArgumentType(
                 ResourceLocation.fromNamespaceAndPath(MOD_ID, "signal_type"),

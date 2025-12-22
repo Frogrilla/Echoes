@@ -19,7 +19,8 @@ public class CorruptedEcho extends Echo{
     public static final MapCodec<CorruptedEcho> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BlockPos.CODEC.fieldOf("block_pos").forGetter(CorruptedEcho::getBlockPos),
             Direction.CODEC.fieldOf("direction").forGetter(CorruptedEcho::getDirection),
-            Codec.BYTE.fieldOf("strength").forGetter(CorruptedEcho::getStrength)
+            Codec.BYTE.fieldOf("strength").forGetter(CorruptedEcho::getStrength),
+            Codec.INT.fieldOf("id").forGetter(CorruptedEcho::getID)
     ).apply(instance, CorruptedEcho::new));
 
     @Override
@@ -27,15 +28,17 @@ public class CorruptedEcho extends Echo{
         return EchoesSignalTypes.CORRUPTED_ECHO;
     }
 
-    public CorruptedEcho(BlockPos blockPos, Direction direction, int strength) {
-        super(blockPos, direction, strength);
+    public CorruptedEcho(BlockPos blockPos, Direction direction, int strength, int id) {
+        super(blockPos, direction, strength, id);
     }
 
     public CorruptedEcho(SignalProperties properties) {
         super(properties);
     }
 
-    public CorruptedEcho() {};
+    public CorruptedEcho() {
+        super();
+    };
 
     @Override
     public SignalStatus preTick(SignalManager signalManager, ServerLevel serverLevel, BlockState blockState) {

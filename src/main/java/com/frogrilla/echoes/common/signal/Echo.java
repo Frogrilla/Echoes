@@ -19,7 +19,8 @@ public class Echo extends AbstractSignal {
     public static final MapCodec<Echo> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
             BlockPos.CODEC.fieldOf("block_pos").forGetter(Echo::getBlockPos),
             Direction.CODEC.fieldOf("direction").forGetter(Echo::getDirection),
-            Codec.BYTE.fieldOf("strength").forGetter(Echo::getStrength)
+            Codec.BYTE.fieldOf("strength").forGetter(Echo::getStrength),
+            Codec.INT.fieldOf("id").forGetter(Echo::getID)
     ).apply(instance, Echo::new));
 
     @Override
@@ -33,10 +34,11 @@ public class Echo extends AbstractSignal {
     int counter = 0;
 
 
-    public Echo(BlockPos blockPos, Direction direction, int strength) {
+    public Echo(BlockPos blockPos, Direction direction, int strength, int id) {
         this.blockPos = blockPos;
         this.direction = direction;
         this.strength = (byte) strength;
+        this.id = id;
     }
 
     public Echo(SignalProperties properties) {
